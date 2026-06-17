@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://4fdmuhnwuik2" path="res://scripts/player/camera_3d.gd" id="3_5afdu"]
 [ext_resource type="Script" uid="uid://06it6uxlq8yp" path="res://scripts/player/melee_hitbox.gd" id="3_5tt2p"]
 [ext_resource type="PackedScene" uid="uid://b3x2seag4425n" path="res://scenes/system/user_interface.tscn" id="4_0nonk"]
+[ext_resource type="Shader" uid="uid://rr8dkln1unjl" path="res://assets/shaders/post_processing/slash_visual.gdshader" id="5_m7hbg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x7p2l"]
 radius = 0.4
@@ -35,6 +36,17 @@ albedo_color = Color(1, 1, 1, 0.078431375)
 [sub_resource type="BoxMesh" id="BoxMesh_5afdu"]
 material = SubResource("StandardMaterial3D_5afdu")
 size = Vector3(0.01, 0.01, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2k8ub"]
+render_priority = 0
+shader = ExtResource("5_m7hbg")
+shader_parameter/slash_color = Color(1, 0.8627451, 0.49019608, 0.5019608)
+shader_parameter/curve_height = 0.5
+shader_parameter/thickness = 0.1
+shader_parameter/fade_opacity = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5afdu"]
+size = Vector2(2, 2)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0nonk"]
 
@@ -72,12 +84,18 @@ preprocess = 1.0
 process_material = SubResource("ParticleProcessMaterial_5afdu")
 draw_pass_1 = SubResource("BoxMesh_5afdu")
 
-[node name="MeleeHitbox" type="ShapeCast3D" parent="CameraController" unique_id=1517919723 node_paths=PackedStringArray("player_controller", "melee_cast")]
+[node name="SlashVisual" type="MeshInstance3D" parent="CameraController/Camera3D" unique_id=964072645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+material_override = SubResource("ShaderMaterial_2k8ub")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_5afdu")
+
+[node name="MeleeHitbox" type="ShapeCast3D" parent="CameraController" unique_id=1517919723 node_paths=PackedStringArray("player_controller", "slash_visual")]
 shape = SubResource("SphereShape3D_0nonk")
 target_position = Vector3(0, 0, -0.75)
 script = ExtResource("3_5tt2p")
 player_controller = NodePath("../..")
-melee_cast = NodePath(".")
+slash_visual = NodePath("../Camera3D/SlashVisual")
 
 [node name="Components" type="Node" parent="." unique_id=1566056031]
 
