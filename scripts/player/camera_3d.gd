@@ -4,6 +4,7 @@ extends Camera3D
 @export var camera_juice: bool = true
 
 @export var speed_lines: GPUParticles3D
+@export var speed_overlay: ColorRect
 
 @export var speed_threshold: float = 2.5
 @export var speedline_threshold: float = 4.5
@@ -40,6 +41,17 @@ func _process(delta: float) -> void:
 			var target_basis = Basis.looking_at(vel_dir, up_dir)
 			#speed_lines.global_transform.basis = speed_lines.global_transform.basis.slerp(target_basis, delta * 15.0)
 			speed_lines.global_transform.basis = target_basis
+
+	if speed_overlay and speed_overlay.material:
+		# Get the current intensity from the shader
+		var current_intensity = speed_overlay.material.get_shader_parameter("intensity")
+
+		# Target is 1.0 (Full effect) if speeding, 0.0 (Invisible) if slow
+		var target_intensity = 1.0 if is_speeding else 0.0
+
+		# Smoothly fade the shader in and out
+		var new_intensity = lerp(current_intensity, target_intensity, delta * 5.0)
+		speed_overlay.material.set_shader_parameter("intensity", new_intensity)
 
 	if not camera_juice or not player_controller:
 		return

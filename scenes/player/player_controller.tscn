@@ -57,10 +57,11 @@ script = ExtResource("1_dovo2")
 player_controller = NodePath("..")
 component_mouse_capture = NodePath("../Components/MouseCapture")
 
-[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=904467470 node_paths=PackedStringArray("player_controller", "speed_lines")]
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=904467470 node_paths=PackedStringArray("player_controller", "speed_lines", "speed_overlay")]
 script = ExtResource("3_5afdu")
 player_controller = NodePath("../..")
 speed_lines = NodePath("SpeedLines")
+speed_overlay = NodePath("../../UserInterface/HUD/SpeedOverlay")
 
 [node name="SpeedLines" type="GPUParticles3D" parent="CameraController/Camera3D" unique_id=144344486]
 cast_shadow = 0
@@ -84,3 +85,5 @@ melee_cast = NodePath(".")
 script = ExtResource("1_8afob")
 
 [node name="UserInterface" parent="." unique_id=397205683 instance=ExtResource("4_0nonk")]
+
+[editable path="UserInterface"]

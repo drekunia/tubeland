@@ -71,6 +71,15 @@ mesh = SubResource("BoxMesh_7p5tm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/JumpCheck2" unique_id=1953284862]
 shape = SubResource("BoxShape3D_liqhv")
 
+[node name="HeightCheck" type="StaticBody3D" parent="Geometry" unique_id=276341891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.25, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/HeightCheck" unique_id=1294248166]
+mesh = SubResource("BoxMesh_vwqw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/HeightCheck" unique_id=1395054042]
+shape = SubResource("BoxShape3D_7p8cw")
+
 [node name="WorldEnvironment" parent="." unique_id=42745243 instance=ExtResource("3_5ymg4")]
 
 [node name="PlayerController" parent="." unique_id=1646534079 instance=ExtResource("4_vwqw5")]
