@@ -26,8 +26,8 @@ func perform_melee():
 			var random_flip = 1 if randi() % 2 == 0 else -1
 
 			var random_x = randf_range(-0.5, 0.5)
-			var random_y = randf_range(-0.4, 0.4)
-			slash_visual.position = Vector3(random_x, random_y, -1.5)
+			var random_y = randf_range(-0.35, 0.35)
+			slash_visual.position = Vector3(random_x, random_y, -1.25)
 
 			slash_visual.scale = Vector3(2.0 * random_flip, 0.05, 0.5)
 			mat.set_shader_parameter("fade_opacity", 1.0)

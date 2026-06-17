@@ -40,7 +40,7 @@ size = Vector3(0.01, 0.01, 3)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2k8ub"]
 render_priority = 0
 shader = ExtResource("5_m7hbg")
-shader_parameter/slash_color = Color(1, 0.8627451, 0.49019608, 0.5019608)
+shader_parameter/slash_color = Color(1, 1, 0.627451, 0.5019608)
 shader_parameter/curve_height = 0.5
 shader_parameter/thickness = 0.1
 shader_parameter/fade_opacity = 0.0
