@@ -7,6 +7,11 @@ class_name MeleeHitbox extends ShapeCast3D
 @export var melee_cast: ShapeCast3D
 var can_melee: bool = true
 
+func _physics_process(_delta: float) -> void:
+	# Make sure this matches your exact Input Map name!
+	if Input.is_action_pressed("attack"):
+		perform_melee()
+
 func perform_melee():
 	if not can_melee:
 		return
