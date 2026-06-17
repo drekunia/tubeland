@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://wuw7dp76orfi"]
+
+[ext_resource type="Script" uid="uid://cwmjid2pvyna" path="res://scripts/player/components/mouse_capture.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://bfi5aw5expr6x" path="res://scripts/player/camera_controller.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://d07kdex5msve0" path="res://scripts/player/player_controller.gd" id="1_gmlin"]
+[ext_resource type="Script" uid="uid://4fdmuhnwuik2" path="res://scripts/player/camera_3d.gd" id="3_5afdu"]
+[ext_resource type="Script" uid="uid://06it6uxlq8yp" path="res://scripts/player/melee_hitbox.gd" id="3_5tt2p"]
+[ext_resource type="PackedScene" uid="uid://b3x2seag4425n" path="res://scenes/system/user_interface.tscn" id="4_0nonk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x7p2l"]
+radius = 0.4
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+radius = 0.4
+height = 1.7
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5afdu"]
+emission_shape_offset = Vector3(0, 0, -10)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 6.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5afdu"]
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.078431375)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5afdu"]
+material = SubResource("StandardMaterial3D_5afdu")
+size = Vector3(0.01, 0.01, 3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0nonk"]
+
+[node name="PlayerController" type="CharacterBody3D" unique_id=1646534079 node_paths=PackedStringArray("melee_hitbox")]
+script = ExtResource("1_gmlin")
+melee_hitbox = NodePath("CameraController/MeleeHitbox")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1747320263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_x7p2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1639110968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_x7p2l")
+
+[node name="CameraController" type="Node3D" parent="." unique_id=1490767283 node_paths=PackedStringArray("player_controller", "component_mouse_capture")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("1_dovo2")
+player_controller = NodePath("..")
+component_mouse_capture = NodePath("../Components/MouseCapture")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=904467470 node_paths=PackedStringArray("player_controller", "speed_lines")]
+script = ExtResource("3_5afdu")
+player_controller = NodePath("../..")
+speed_lines = NodePath("SpeedLines")
+
+[node name="SpeedLines" type="GPUParticles3D" parent="CameraController/Camera3D" unique_id=144344486]
+cast_shadow = 0
+emitting = false
+amount = 30
+lifetime = 0.5
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_5afdu")
+draw_pass_1 = SubResource("BoxMesh_5afdu")
+
+[node name="MeleeHitbox" type="ShapeCast3D" parent="CameraController" unique_id=1517919723 node_paths=PackedStringArray("player_controller", "melee_cast")]
+shape = SubResource("SphereShape3D_0nonk")
+target_position = Vector3(0, 0, -0.75)
+script = ExtResource("3_5tt2p")
+player_controller = NodePath("../..")
+melee_cast = NodePath(".")
+
+[node name="Components" type="Node" parent="." unique_id=1566056031]
+
+[node name="MouseCapture" type="Node" parent="Components" unique_id=307089251]
+script = ExtResource("1_8afob")
+
+[node name="UserInterface" parent="." unique_id=397205683 instance=ExtResource("4_0nonk")]
