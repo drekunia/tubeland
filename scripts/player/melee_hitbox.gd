@@ -5,8 +5,16 @@ class_name MeleeHitbox extends ShapeCast3D
 
 @export var player_controller: PlayerController
 @export var slash_visual: MeshInstance3D
+@export var hit_spark_scene: PackedScene
 
 var can_melee: bool = true
+
+func _ready() -> void:
+	# Tell the Shapecast to NEVER collide with the player!
+	if player_controller:
+		add_exception(player_controller)
+	else:
+		print_debug("WARNING: player_controller is not assigned in the Inspector!")
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("attack"):
@@ -43,6 +51,11 @@ func perform_melee():
 	force_shapecast_update()
 
 	if is_colliding():
+		var hit_point = get_collision_point(0)
+		var hit_normal = get_collision_normal(0)
+
+		spawn_hit_spark(hit_point, hit_normal)
+
 		for i in get_collision_count():
 			var target = get_collider(i)
 			if target.has_method("take_damage"):
@@ -50,3 +63,26 @@ func perform_melee():
 
 	await get_tree().create_timer(melee_cooldown).timeout
 	can_melee = true
+
+func spawn_hit_spark(pos: Vector3, normal: Vector3) -> void:
+	if not hit_spark_scene:
+		return
+
+	var spark = hit_spark_scene.instantiate()
+	get_tree().current_scene.add_child(spark)
+
+	# Move it to the exact point the sword hit
+	spark.global_position = pos - (normal * 0.2)
+
+	# --- ROTATION LOGIC ---
+	# Define our default "Up" direction
+	var safe_up = Vector3.UP
+
+	# If the wall normal is pointing almost perfectly straight up or straight down...
+	# We temporarily change the "Up" reference to Vector3.RIGHT to prevent the math from breaking!
+	if abs(normal.y) > 0.99:
+		safe_up = Vector3.RIGHT
+
+	# Now we can safely look away from the wall on ANY surface (walls, floors, ceilings)
+	spark.look_at(pos + normal, safe_up)
+	# ----------------------

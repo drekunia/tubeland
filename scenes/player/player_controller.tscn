@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://06it6uxlq8yp" path="res://scripts/player/melee_hitbox.gd" id="3_5tt2p"]
 [ext_resource type="PackedScene" uid="uid://b3x2seag4425n" path="res://scenes/system/user_interface.tscn" id="4_0nonk"]
 [ext_resource type="Shader" uid="uid://rr8dkln1unjl" path="res://assets/shaders/post_processing/slash_visual.gdshader" id="5_m7hbg"]
+[ext_resource type="PackedScene" uid="uid://c4cgeo074e5vn" path="res://scenes/vfx/hit_spark.tscn" id="6_2k8ub"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x7p2l"]
 radius = 0.4
@@ -92,10 +93,11 @@ mesh = SubResource("QuadMesh_5afdu")
 
 [node name="MeleeHitbox" type="ShapeCast3D" parent="CameraController" unique_id=1517919723 node_paths=PackedStringArray("player_controller", "slash_visual")]
 shape = SubResource("SphereShape3D_0nonk")
-target_position = Vector3(0, 0, -0.75)
+target_position = Vector3(0, 0, -1)
 script = ExtResource("3_5tt2p")
 player_controller = NodePath("../..")
 slash_visual = NodePath("../Camera3D/SlashVisual")
+hit_spark_scene = ExtResource("6_2k8ub")
 
 [node name="Components" type="Node" parent="." unique_id=1566056031]
 
