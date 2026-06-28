@@ -16,9 +16,6 @@ extends Camera3D
 @export var max_tilt: float = 2.5
 @export var tilt_speed: float = 2.0
 
-@export var bob_frequency: float = 2.0
-@export var bob_amplitude: float = 0.05
-var t_bob: float = 0.0
 
 func _process(delta: float) -> void:
 	var is_speeding = false

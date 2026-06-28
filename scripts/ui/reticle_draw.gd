@@ -1,8 +1,6 @@
 @tool
 extends Control
 
-@export_category("References")
-@export var player_controller: PlayerController
 
 @export var crosshair_size: float = 10.0
 @export var line_width: float = 2.0
