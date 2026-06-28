@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://card_pickup_scene"]
+
+[ext_resource type="Script" path="res://scripts/powerups/card_pickup.gd" id="1_cardpickup"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_pickup"]
+radius = 0.3
+height = 0.6
+
+[node name="CardPickup" type="Area3D"]
+script = ExtResource("1_cardpickup")
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_pickup")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 2.0
+omni_range = 3.5

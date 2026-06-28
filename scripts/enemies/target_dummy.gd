@@ -1,6 +1,7 @@
 class_name TargetDummy extends RigidBody3D
 
-@export var double_jump_powerup_scene: PackedScene
+@export var card_pickup_scene: PackedScene
+@export var drop_card_type: CardType.Type = CardType.Type.ELEVATE
 
 var health: int = 100
 
@@ -11,17 +12,19 @@ func take_damage(amount: int):
 		die()
 
 func die():
-	_drop_powerup()
+	_drop_card()
 	queue_free()
 
-func _drop_powerup() -> void:
-	if not double_jump_powerup_scene:
+func _drop_card() -> void:
+	if not card_pickup_scene:
 		return
 
-	var powerup = double_jump_powerup_scene.instantiate()
+	var pickup := card_pickup_scene.instantiate() as CardPickup
 
-	# Add to tree first (global_position requires being inside the scene tree),
-	# then set position. The powerup's _initialized flag captures _base_y on
-	# the first _process frame, so the hover origin will be correct.
-	get_tree().current_scene.add_child(powerup)
-	powerup.global_position = global_position + Vector3(0, 0.75, 0)
+	# Set card_type BEFORE add_child so _ready() → _apply_visuals() sees the right color.
+	pickup.card_type = drop_card_type
+
+	# add_child first (global_position needs the node inside the tree),
+	# then position it above the enemy.
+	get_tree().current_scene.add_child(pickup)
+	pickup.global_position = global_position + Vector3(0, 0.75, 0)

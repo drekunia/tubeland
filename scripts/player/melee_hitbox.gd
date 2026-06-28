@@ -1,6 +1,6 @@
 class_name MeleeHitbox extends ShapeCast3D
 
-@export var melee_damage: int = 50
+@export var melee_damage: int = 100
 @export var melee_cooldown: float = 0.5
 
 @export var player_controller: PlayerController

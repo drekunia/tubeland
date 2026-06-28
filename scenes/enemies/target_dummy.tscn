@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xp35446g4jsd" path="res://scripts/enemies/target_dummy.gd" id="1_p728r"]
 [ext_resource type="Texture2D" uid="uid://bve2qxnjajvt0" path="res://assets/meshes/characters/enemies/smiley_albedo.png" id="2_3o7vv"]
-[ext_resource type="PackedScene" path="res://scenes/powerups/double_jump_powerup.tscn" id="2_lj2r1"]
+[ext_resource type="PackedScene" path="res://scenes/powerups/card_pickup.tscn" id="2_lj2r1"]
 [ext_resource type="Shader" uid="uid://bbio8syrd72qy" path="res://assets/shaders/characters/enemies/smiley.gdshader" id="3_xxwgs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dadod"]
@@ -67,7 +67,8 @@ radius = 0.4
 
 [node name="TargetDummy" type="RigidBody3D" unique_id=139084748]
 script = ExtResource("1_p728r")
-double_jump_powerup_scene = ExtResource("2_lj2r1")
+card_pickup_scene = ExtResource("2_lj2r1")
+drop_card_type = 2
 
 [node name="smiley" type="Node3D" parent="." unique_id=738560614]
 
