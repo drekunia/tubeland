@@ -17,6 +17,8 @@ uniform float arm_blend_distance = 0.3;
 uniform float arm_speed = 8.0;
 uniform float arm_flap_amount = 0.5;
 
+uniform float shoot_intensity = 0.0;
+
 // --- Visuals ---
 uniform vec4 base_color : source_color = vec4(0.9, 0.8, 0.1, 1.0);
 uniform sampler2D albedo_texture : source_color, filter_nearest;
@@ -46,9 +48,11 @@ void vertex() {
     float total_flap = (flap1 + flap2 * wind_chaos) * arm_flap_amount * arm_length;
 
     vec3 arm_movement = vec3(0.0);
-    arm_movement.y = total_flap;
-    arm_movement.x = sin(t * arm_speed * 1.2 + offset) * arm_flap_amount * 0.15 * arm_length;
-    arm_movement.z = 0.0;
+    arm_movement.y = mix(total_flap, 0.0, shoot_intensity);
+    arm_movement.x = mix(sin(t * arm_speed * 1.2 + offset) * arm_flap_amount * 0.15 * arm_length, 0.0, shoot_intensity);
+    
+    // Stretch arms forward (+Z) to point at player when shooting!
+    arm_movement.z = mix(0.0, arm_length * 3.0, shoot_intensity);
 
     // --- Calculate the Body Sway (Isolated) ---
     vec3 body_movement = vec3(0.0);

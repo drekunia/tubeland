@@ -10,6 +10,8 @@ class_name MeleeHitbox extends ShapeCast3D
 var can_melee: bool = true
 
 func _ready() -> void:
+	collide_with_areas = true
+
 	# Tell the Shapecast to NEVER collide with the player!
 	if player_controller:
 		add_exception(player_controller)

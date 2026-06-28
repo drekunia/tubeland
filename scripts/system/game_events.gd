@@ -6,3 +6,9 @@ extends Node
 ## hand is an Array[CardType.Type] representing cards in order (index 0 = next to use).
 @warning_ignore("unused_signal")
 signal card_hand_changed(hand: Array)
+
+@warning_ignore("unused_signal")
+signal player_health_changed(current_health: int, max_health: int)
+
+@warning_ignore("unused_signal")
+signal player_died()

@@ -50,6 +50,7 @@ shader_parameter/fade_opacity = 0.0
 size = Vector2(2, 2)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0nonk"]
+radius = 1.0
 
 [node name="PlayerController" type="CharacterBody3D" unique_id=1646534079 node_paths=PackedStringArray("melee_hitbox")]
 script = ExtResource("1_gmlin")
@@ -93,7 +94,7 @@ mesh = SubResource("QuadMesh_5afdu")
 
 [node name="MeleeHitbox" type="ShapeCast3D" parent="CameraController" unique_id=1517919723 node_paths=PackedStringArray("player_controller", "slash_visual")]
 shape = SubResource("SphereShape3D_0nonk")
-target_position = Vector3(0, 0, -1)
+target_position = Vector3(0, 0, -1.25)
 script = ExtResource("3_5tt2p")
 player_controller = NodePath("../..")
 slash_visual = NodePath("../Camera3D/SlashVisual")

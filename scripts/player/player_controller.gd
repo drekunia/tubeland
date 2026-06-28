@@ -6,6 +6,8 @@ class_name PlayerController extends CharacterBody3D
 @export var acceleration: float = 35.0
 @export var deceleration: float = 20.0
 
+@export var max_health: int = 5
+
 @export_group("Card Abilities")
 ## ELEVATE: upward burst velocity
 @export var elevate_velocity: float = 8.0
@@ -16,8 +18,31 @@ class_name PlayerController extends CharacterBody3D
 ## Maximum cards held in hand at once
 @export var max_hand_size: int = 3
 
+
 # Ordered hand — index 0 is the next card to be used
 var _card_hand: Array[CardType.Type] = []
+
+var current_health: int
+
+func _ready() -> void:
+	add_to_group("player")
+	current_health = max_health
+	# Delay emitting the signal until the next frame to ensure GameEvents and UI are ready
+	call_deferred("_emit_initial_health")
+
+func _emit_initial_health() -> void:
+	GameEvents.player_health_changed.emit(current_health, max_health)
+
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	GameEvents.player_health_changed.emit(current_health, max_health)
+
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	GameEvents.player_died.emit()
+	get_tree().call_deferred("reload_current_scene")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
