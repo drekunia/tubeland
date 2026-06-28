@@ -14,8 +14,8 @@ uniform float sway_amount = 0.4;
 uniform float body_radius = 0.5;
 // Added a falloff to prevent tearing!
 uniform float arm_blend_distance = 0.3;
-uniform float arm_speed = 12.0;
-uniform float arm_flap_amount = 0.6;
+uniform float arm_speed = 8.0;
+uniform float arm_flap_amount = 0.5;
 
 // --- Visuals ---
 uniform vec4 base_color : source_color = vec4(0.9, 0.8, 0.1, 1.0);
@@ -32,10 +32,6 @@ void vertex() {
 
     float gust = sin(t * 1.5) * 0.5 + 0.5;
 
-    // --- The Anti-Tearing Mask ---
-    // Instead of an IF statement, we calculate a "weight" from 0.0 to 1.0.
-    // 0.0 = Pure Body (inside body_radius)
-    // 1.0 = Pure Arm (past the blend distance)
     float arm_weight = smoothstep(
         body_radius,
         body_radius + arm_blend_distance,
@@ -45,14 +41,14 @@ void vertex() {
     float arm_length = max(0.0, dist_from_center - body_radius);
 
     // --- Calculate the Arm Flap (Isolated) ---
-    float flap1 = sin(t * arm_speed + arm_length * 4.0 + offset);
-    float flap2 = cos(t * (arm_speed * 1.6) - arm_length * 7.0 + offset);
+    float flap1 = sin(t * arm_speed + arm_length * 2.0 + offset);
+    float flap2 = cos(t * (arm_speed * 1.6) - arm_length * 3.0 + offset);
     float total_flap = (flap1 + flap2 * wind_chaos) * arm_flap_amount * arm_length;
 
     vec3 arm_movement = vec3(0.0);
     arm_movement.y = total_flap;
-    arm_movement.x = sin(t * arm_speed * 1.2 + arm_length + offset) * arm_flap_amount * arm_length;
-    arm_movement.z = cos(t * arm_speed * 1.5 - arm_length - offset) * arm_flap_amount * arm_length;
+    arm_movement.x = sin(t * arm_speed * 1.2 + offset) * arm_flap_amount * 0.15 * arm_length;
+    arm_movement.z = 0.0;
 
     // --- Calculate the Body Sway (Isolated) ---
     vec3 body_movement = vec3(0.0);
@@ -67,9 +63,6 @@ void vertex() {
         body_movement.z = (wind_direction.y * wind_strength * gust + wobbleZ * sway_amount) * height;
     }
 
-    // --- The Magic Blend ---
-    // We blend the body movement and the arm movement together using the weight we calculated.
-    // The shoulder (weight 0.5) gets half body sway, half arm flap!
     VERTEX = orig + mix(body_movement, arm_movement + body_movement, arm_weight);
 }
 
