@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ccb8rtnn26e4t" path="res://scripts/ui/reticle_draw.gd" id="1_jqr8t"]
 [ext_resource type="Shader" uid="uid://c4mx4sqgpuw7w" path="res://assets/shaders/post_processing/speed_overlay.gdshader" id="2_s3ato"]
+[ext_resource type="Script" uid="uid://b0y264t2mkspr" path="res://scripts/ui/card_hud.gd" id="3_cardhud"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s3ato"]
 
@@ -49,3 +50,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CardHUD" type="Control" parent="HUD" unique_id=778123456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_cardhud")
