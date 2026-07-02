@@ -69,7 +69,9 @@ radius = 0.4
 [node name="TargetDummy" type="RigidBody3D" unique_id=139084748]
 script = ExtResource("1_p728r")
 card_pickup_scene = ExtResource("2_lj2r1")
-drop_card_type = 2
+drop_card_type = 1
+fire_rate = 3.5
+aggro_radius = 20.0
 
 [node name="smiley" type="Node3D" parent="." unique_id=738560614]
 

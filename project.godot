@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tubeland"
-run/main_scene="uid://dto0lm1egax4a"
+run/main_scene="uid://ks7c6qeodjbc"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

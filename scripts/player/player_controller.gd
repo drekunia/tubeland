@@ -23,6 +23,8 @@ class_name PlayerController extends CharacterBody3D
 var _card_hand: Array[CardType.Type] = []
 
 var current_health: int
+var dash_time_remaining: float = 0.0
+var dash_hit_targets: Array[Node] = []
 
 func _ready() -> void:
 	add_to_group("player")
@@ -68,7 +70,27 @@ func _physics_process(delta: float) -> void:
 	velocity.x = horizontal_vel.x
 	velocity.z = horizontal_vel.z
 
+	var pre_dash_vel := velocity
 	move_and_slide()
+
+	if dash_time_remaining > 0.0:
+		dash_time_remaining -= delta
+		var hit_enemy := false
+		for i in get_slide_collision_count():
+			var coll := get_slide_collision(i)
+			var collider := coll.get_collider()
+			if collider and collider.has_method("take_damage") and collider not in dash_hit_targets:
+				dash_hit_targets.append(collider)
+				collider.take_damage(100)
+				hit_enemy = true
+				if melee_hitbox and melee_hitbox.has_method("spawn_hit_spark"):
+					melee_hitbox.spawn_hit_spark(coll.get_position(), coll.get_normal())
+				# Add exception so we pass right through if it doesn't instantly vanish
+				add_collision_exception_with(collider)
+
+		if hit_enemy:
+			# Restore momentum so the player punches right through the enemy instead of being stopped
+			velocity = pre_dash_vel
 
 func update_rotation(rotation_input: Vector3) -> void:
 	global_transform.basis = Basis.from_euler(rotation_input)
@@ -103,12 +125,18 @@ func _do_godspeed() -> void:
 	if is_on_floor():
 		velocity.y = 1.5
 
+	dash_time_remaining = 0.5
+	dash_hit_targets.clear()
+
 func _do_fireball() -> void:
 	# Full 3D dash toward wherever the crosshair is pointing
 	var cam := get_viewport().get_camera_3d()
 	if cam:
 		var aim_dir := -cam.global_transform.basis.z
 		velocity = aim_dir.normalized() * fireball_velocity
+
+	dash_time_remaining = 0.5
+	dash_hit_targets.clear()
 
 # ── Card inventory ──────────────────────────────────────────────────────────
 

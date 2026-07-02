@@ -47,6 +47,9 @@ func _process(delta: float) -> void:
 				var opposite_aim = head.global_position * 2.0 - aim_target
 				head.look_at(opposite_aim, Vector3.UP)
 
+				# Prevent the enemy from leaning too far back when the player is close
+				head.rotation.x = clampf(head.rotation.x, -0.25, 0.25)
+
 	if is_aggro:
 		fire_timer -= delta
 		if fire_timer <= 0.0:
@@ -86,6 +89,8 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	collision_layer = 0
+	collision_mask = 0
 	_drop_card()
 	queue_free()
 

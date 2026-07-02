@@ -1,14 +1,69 @@
 [gd_scene format=3 uid="uid://du871hvx4j7hb"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j1by8"]
+[ext_resource type="Shader" uid="uid://cu33fitek0xvd" path="res://assets/shaders/post_processing/world_environment.gdshader" id="1_yauy5"]
+[ext_resource type="Shader" uid="uid://d2his3q6bg06e" path="res://assets/shaders/textures/world_environment.gdshader" id="2_g00md"]
+[ext_resource type="Texture2D" uid="uid://tmvrdt2pm6hc" path="res://icon.svg" id="3_47cg5"]
+[ext_resource type="Script" uid="uid://cjqhi2bevsa08" path="res://scripts/environment/fall_out_of_bound.gd" id="4_foob"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pouce"]
+shader = ExtResource("1_yauy5")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_yauy5"]
-sky_material = SubResource("ProceduralSkyMaterial_j1by8")
+sky_material = SubResource("ShaderMaterial_pouce")
 
 [sub_resource type="Environment" id="Environment_g00md"]
 background_mode = 2
 sky = SubResource("Sky_yauy5")
 ambient_light_color = Color(0, 0, 0.5882353, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yauy5"]
+render_priority = 0
+shader = ExtResource("2_g00md")
+shader_parameter/noise_texture = ExtResource("3_47cg5")
+shader_parameter/use_custom_texture = 0.0
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 19.99999955296
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.7999999821184
+shader_parameter/clouds_color = Color(1, 1, 1, 1)
+shader_parameter/edge_fade = 0.15
+shader_parameter/use_world_coordinates = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_47cg5"]
+material = SubResource("ShaderMaterial_yauy5")
+size = Vector3(10000, 0.1, 10000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4a3b0"]
+size = Vector3(10000, 0.1, 10000)
 
 [node name="WorldEnvironment" type="WorldEnvironment" unique_id=42745243]
 environment = SubResource("Environment_g00md")
@@ -16,3 +71,14 @@ environment = SubResource("Environment_g00md")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=48610477]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+
+[node name="FallOutOfBound" type="Area3D" parent="." unique_id=677281274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.05, 0)
+script = ExtResource("4_foob")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FallOutOfBound" unique_id=2085519408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003232956, -0.0023629665, 0.0005517006)
+mesh = SubResource("BoxMesh_47cg5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallOutOfBound" unique_id=1209466198]
+shape = SubResource("BoxShape3D_4a3b0")
