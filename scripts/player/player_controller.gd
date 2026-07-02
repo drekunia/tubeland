@@ -12,9 +12,9 @@ class_name PlayerController extends CharacterBody3D
 ## ELEVATE: upward burst velocity
 @export var elevate_velocity: float = 8.0
 ## GODSPEED: horizontal dash speed
-@export var godspeed_velocity: float = 18.0
+@export var godspeed_velocity: float = 24.0
 ## FIREBALL: full 3D dash speed toward crosshair
-@export var fireball_velocity: float = 22.0
+@export var fireball_velocity: float = 28.0
 ## Maximum cards held in hand at once
 @export var max_hand_size: int = 3
 
@@ -140,10 +140,10 @@ func _do_fireball() -> void:
 
 # ── Card inventory ──────────────────────────────────────────────────────────
 
-## Called by CardPickup. Returns false if the hand is already full.
+## Called by CardPickup. Discards the oldest card if the hand is full.
 func add_card(type: CardType.Type) -> bool:
 	if _card_hand.size() >= max_hand_size:
-		return false
+		_card_hand.pop_front()
 	_card_hand.append(type)
 	GameEvents.card_hand_changed.emit(_card_hand.duplicate())
 	return true

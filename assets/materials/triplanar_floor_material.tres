@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d1c2b3a4f5e6g"]
+
+[ext_resource type="Shader" uid="uid://c0i65euj72axv" path="res://assets/shaders/triplanar_floor.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://saomm7igcun5" path="res://assets/textures/512x512/Grass/Grass_12-512x512.png" id="2_twirn"]
+[ext_resource type="Texture2D" uid="uid://b6gyim1eb4usd" path="res://assets/textures/512x512/Grass/Grass_24-512x512.png" id="3_twirn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/enable_normal_map = false
+shader_parameter/enable_roughness = false
+shader_parameter/roughness = 1.0
+shader_parameter/x_albedo = ExtResource("2_twirn")
+shader_parameter/x_scale = 1.0
+shader_parameter/y_albedo = ExtResource("3_twirn")
+shader_parameter/y_scale = 1.0
+shader_parameter/z_albedo = ExtResource("2_twirn")
+shader_parameter/z_scale = 1.0

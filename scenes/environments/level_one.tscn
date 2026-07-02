@@ -2,14 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://wuw7dp76orfi" path="res://scenes/player/player_controller.tscn" id="1_pouce"]
 [ext_resource type="PackedScene" uid="uid://du871hvx4j7hb" path="res://scenes/environments/world_environment.tscn" id="1_scxpq"]
-[ext_resource type="Texture2D" uid="uid://dprwn2mbhlchg" path="res://assets/textures/grids/Green/texture_08.png" id="2_pouce"]
 [ext_resource type="PackedScene" uid="uid://dowwytdkkltfs" path="res://scenes/enemies/target_dummy.tscn" id="4_yd7wr"]
 [ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="5_ookm7"]
 [ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="6_sl2ic"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pouce"]
-albedo_texture = ExtResource("2_pouce")
-uv1_triplanar = true
+[ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="10_material"]
 
 [node name="LevelOne" type="Node3D" unique_id=2105970598]
 
@@ -23,37 +19,37 @@ uv1_triplanar = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -10.911201, -0.0015869141)
 use_collision = true
 size = Vector3(15, 21.727636, 15)
-material = SubResource("StandardMaterial3D_pouce")
+material = ExtResource("10_material")
 
 [node name="Floor2" type="CSGBox3D" parent="Floors" unique_id=930368015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -13.275002, -20.001587)
 use_collision = true
 size = Vector3(15, 17, 25)
-material = SubResource("StandardMaterial3D_pouce")
+material = ExtResource("10_material")
 
 [node name="Floor3" type="CSGBox3D" parent="Floors" unique_id=926211749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -11.011502, -40.001587)
 use_collision = true
 size = Vector3(15, 21.526905, 15)
-material = SubResource("StandardMaterial3D_pouce")
+material = ExtResource("10_material")
 
 [node name="Floor4" type="CSGBox3D" parent="Floors" unique_id=321367894]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.99421, -7.896902, -40.001587)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.435257, -7.8969, -38.154633)
 use_collision = true
-size = Vector3(15, 27.7562, 15)
-material = SubResource("StandardMaterial3D_pouce")
+size = Vector3(3.6679688, 27.7562, 15)
+material = ExtResource("10_material")
 
 [node name="Floor5" type="CSGBox3D" parent="Floors" unique_id=695677581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -13.4786, -55.001587)
 use_collision = true
 size = Vector3(15, 16.592701, 15)
-material = SubResource("StandardMaterial3D_pouce")
+material = ExtResource("10_material")
 
 [node name="Floor6" type="CSGBox3D" parent="Floors" unique_id=2065562127]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10.316523, -55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.694985, -10.917946, -52.22637)
 use_collision = true
 size = Vector3(15, 22.747265, 15)
-material = SubResource("StandardMaterial3D_pouce")
+material = ExtResource("10_material")
 
 [node name="Geometry" type="Node3D" parent="." unique_id=1885249728]
 
@@ -61,21 +57,25 @@ material = SubResource("StandardMaterial3D_pouce")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5057898, -3.2750015, -29.501587)
 use_collision = true
 size = Vector3(2, 3, 2)
+material = ExtResource("10_material")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Geometry" unique_id=159379716]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5057898, -3.0250015, -31.501587)
 use_collision = true
 size = Vector3(2, 3.5, 2)
+material = ExtResource("10_material")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Geometry" unique_id=1360880620]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5057898, -3.7750015, -30.501587)
 use_collision = true
 size = Vector3(2, 2, 4)
+material = ExtResource("10_material")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Geometry" unique_id=1655396738]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5057898, -4.2750015, -26.501587)
 use_collision = true
 size = Vector3(2, 1, 4)
+material = ExtResource("10_material")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=250942826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1303539, -4.7750006, -29.924559)
@@ -83,11 +83,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1303539, -4.7750006, -29.92
 [node name="TargetDummy" parent="Node3D" unique_id=139084748 instance=ExtResource("4_yd7wr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79751444, 0, 0)
 
+[node name="TargetDummy5" parent="Node3D" unique_id=796429181 instance=ExtResource("4_yd7wr")]
+transform = Transform3D(-0.46691325, 0, -0.8843033, 0, 1, 0, 0.8843033, 0, -0.46691325, 4.7801394, 10.764397, -15.215086)
+
+[node name="TargetDummy9" parent="Node3D" unique_id=843682187 instance=ExtResource("4_yd7wr")]
+transform = Transform3D(-0.10098277, 0, -0.99488825, 0, 1, 0, 0.99488825, 0, -0.10098277, 4.7801394, 10.764397, -7.151552)
+
+[node name="TargetDummy10" parent="Node3D" unique_id=1200536392 instance=ExtResource("4_yd7wr")]
+transform = Transform3D(0.91843826, 0, -0.39556462, 0, 1, 0, 0.39556462, 0, 0.91843826, 4.7801394, 10.764397, -1.0910912)
+
 [node name="TargetDummy2" parent="Node3D" unique_id=516274424 instance=ExtResource("4_yd7wr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43985915, 4.7683716e-07, 3.155342)
 
 [node name="TargetDummy3" parent="Node3D" unique_id=1267973563 instance=ExtResource("5_ookm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.784218, 4.52695, -15.462904)
+transform = Transform3D(0.79240495, 0, 0.6099954, 0, 1, 0, -0.6099954, 0, 0.79240495, -4.223096, 4.52695, -15.462904)
+
+[node name="TargetDummy6" parent="Node3D" unique_id=1916538392 instance=ExtResource("5_ookm7")]
+transform = Transform3D(0.79240495, 0, 0.6099954, 0, 1, 0, -0.6099954, 0, 0.79240495, -17.145, 5.232815, -26.072939)
+
+[node name="TargetDummy7" parent="Node3D" unique_id=668756095 instance=ExtResource("5_ookm7")]
+transform = Transform3D(0.79240495, 0, 0.6099954, 0, 1, 0, -0.6099954, 0, 0.79240495, -11.942116, 5.232815, -25.265276)
+
+[node name="TargetDummy8" parent="Node3D" unique_id=1300120748 instance=ExtResource("5_ookm7")]
+transform = Transform3D(0.79240495, 0, 0.6099954, 0, 1, 0, -0.6099954, 0, 0.79240495, -14.5683975, 5.232815, -21.640814)
 
 [node name="TargetDummy4" parent="Node3D" unique_id=1921921888 instance=ExtResource("6_sl2ic")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5511918, -4.7683716e-07, 6.7437153)
