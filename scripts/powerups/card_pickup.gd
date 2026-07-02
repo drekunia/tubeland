@@ -10,7 +10,7 @@ class_name CardPickup extends Area3D
 
 # Visual color per card type
 const CARD_COLORS: Dictionary = {
-	CardType.Type.ELEVATE:  Color(0.20, 0.70, 1.00),  # cyan-blue
+	CardType.Type.ELEVATE:  Color(1.00, 1.00, 0.00),  # yellow
 	CardType.Type.GODSPEED: Color(0.20, 1.00, 0.50),  # green
 	CardType.Type.FIREBALL: Color(1.00, 0.40, 0.10),  # orange
 }
