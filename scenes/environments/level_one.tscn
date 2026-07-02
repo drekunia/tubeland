@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://du871hvx4j7hb" path="res://scenes/environments/world_environment.tscn" id="1_scxpq"]
 [ext_resource type="Texture2D" uid="uid://dprwn2mbhlchg" path="res://assets/textures/grids/Green/texture_08.png" id="2_pouce"]
 [ext_resource type="PackedScene" uid="uid://dowwytdkkltfs" path="res://scenes/enemies/target_dummy.tscn" id="4_yd7wr"]
+[ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="5_ookm7"]
+[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="6_sl2ic"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pouce"]
 albedo_texture = ExtResource("2_pouce")
@@ -80,8 +82,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1303539, -4.7750006, -29.92
 
 [node name="TargetDummy" parent="Node3D" unique_id=139084748 instance=ExtResource("4_yd7wr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79751444, 0, 0)
-drop_card_type = 0
 
 [node name="TargetDummy2" parent="Node3D" unique_id=516274424 instance=ExtResource("4_yd7wr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43985915, 4.7683716e-07, 3.155342)
-drop_card_type = 0
+
+[node name="TargetDummy3" parent="Node3D" unique_id=1267973563 instance=ExtResource("5_ookm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.784218, 4.52695, -15.462904)
+
+[node name="TargetDummy4" parent="Node3D" unique_id=1921921888 instance=ExtResource("6_sl2ic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5511918, -4.7683716e-07, 6.7437153)

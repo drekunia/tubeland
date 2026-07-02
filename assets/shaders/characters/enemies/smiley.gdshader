@@ -72,5 +72,7 @@ void vertex() {
 
 void fragment() {
     vec4 tex_color = texture(albedo_texture, UV);
-    ALBEDO = mix(base_color.rgb, tex_color.rgb, tex_color.a);
+    // Multiply base color with texture color to tint the texture
+    // (This works even if the texture has no transparent background)
+    ALBEDO = base_color.rgb * tex_color.rgb;
 }
