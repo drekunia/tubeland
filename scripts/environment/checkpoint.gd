@@ -100,6 +100,27 @@ func _ready() -> void:
 				else:
 					level_five.position = final_pos
 					scene_root_5.call_deferred("add_child", level_five)
+
+	if GameEvents.touched_checkpoints.size() >= 5:
+		var scene_root_6 = get_tree().current_scene
+		if scene_root_6 and scene_root_6.name != "LevelSix":
+			if not scene_root_6.has_meta("spawning_level_six") and not scene_root_6.has_node("LevelSix"):
+				scene_root_6.set_meta("spawning_level_six", true)
+				
+				var level_six_scene = load("res://scenes/environments/level_six.tscn")
+				var level_six = level_six_scene.instantiate()
+				level_six.name = "LevelSix"
+				
+				var final_pos = Vector3(0, -5, -95)
+				
+				if not GameEvents.has_animated_level_six:
+					level_six.position = Vector3(0, -19, -95)
+					scene_root_6.call_deferred("add_child", level_six)
+					call_deferred("_animate_level", level_six, final_pos)
+					GameEvents.has_animated_level_six = true
+				else:
+					level_six.position = final_pos
+					scene_root_6.call_deferred("add_child", level_six)
 func _animate_level(level_node: Node3D, final_pos: Vector3) -> void:
 	var rigid_bodies = level_node.find_children("*", "RigidBody3D", true)
 	for rb in rigid_bodies:
