@@ -72,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.48158, -6.273628, 1.122926
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.035065, -6.2736206, 2.8235703)
 
 [node name="CheckpointPlatform" parent="." unique_id=1617833679 instance=ExtResource("5_sxm8x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.947327, -6.0236225, 26.598927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.947327, -6.0236225, 24.598927)
 
 [node name="TargetDummy16" parent="." unique_id=156611348 instance=ExtResource("3_t5al6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.817406, -6.273622, 23.322832)

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://d1i3bbi70c5hr"]
+
+[ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="1_material"]
+[ext_resource type="PackedScene" uid="uid://dax2oi3ym362o" path="res://scenes/environments/checkpoint_platform.tscn" id="2_ckpt"]
+[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="3_fskc0"]
+
+[node name="LevelFour" type="Node3D" unique_id=880648954]
+
+[node name="Floor6" type="CSGBox3D" parent="." unique_id=987654321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.129, 15.866674, 56.906)
+use_collision = true
+size = Vector3(12.62793, 1.1898804, 12.613281)
+material = ExtResource("1_material")
+
+[node name="Floor7" type="CSGBox3D" parent="." unique_id=1852253394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.475113, 15.866674, 56.906)
+use_collision = true
+size = Vector3(12.62793, 1.1898804, 12.613281)
+material = ExtResource("1_material")
+
+[node name="Floor8" type="CSGBox3D" parent="." unique_id=1399310553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.815313, 15.866674, 56.906)
+use_collision = true
+size = Vector3(12.62793, 1.1898804, 12.613281)
+material = ExtResource("1_material")
+
+[node name="Floor9" type="CSGBox3D" parent="." unique_id=1435828027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.117695, 4.54461, 56.906)
+use_collision = true
+size = Vector3(12.62793, 1.1898804, 12.613281)
+material = ExtResource("1_material")
+
+[node name="TargetDummy" parent="." unique_id=139084748 instance=ExtResource("3_fskc0")]
+transform = Transform3D(0.06985533, 0, 0.9975571, 0, 1, 0, -0.9975571, 0, 0.06985533, 44.94507, 16.461617, 57.05712)
+
+[node name="TargetDummy2" parent="." unique_id=1751071671 instance=ExtResource("3_fskc0")]
+transform = Transform3D(0.028303137, 0, 0.9995994, 0, 1, 0, -0.9995994, 0, 0.028303137, 27.869041, 16.461615, 56.69954)
+
+[node name="TargetDummy3" parent="." unique_id=1203414614 instance=ExtResource("3_fskc0")]
+transform = Transform3D(0.038994394, 0, 0.99923944, 0, 1, 0, -0.99923944, 0, 0.038994394, 9.575526, 16.461615, 56.944073)
+
+[node name="CheckpointPlatform" parent="." unique_id=1617833679 instance=ExtResource("2_ckpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.096943, 5.389551, 57.287376)

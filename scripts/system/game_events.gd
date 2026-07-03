@@ -31,6 +31,7 @@ func set_checkpoint(pos: Vector3) -> void:
 
 var has_animated_level_two: bool = false
 var has_animated_level_three: bool = false
+var has_animated_level_four: bool = false
 
 var saved_card_hand: Array = []
 var has_saved_card_hand: bool = false
