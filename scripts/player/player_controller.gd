@@ -60,10 +60,10 @@ func take_damage(amount: int) -> void:
 	GameEvents.player_health_changed.emit(current_health, max_health)
 
 	if current_health > 0:
-		var sfx = AudioStreamPlayer3D.new()
+		var sfx = AudioStreamPlayer.new()
 		sfx.stream = preload("res://assets/audio/sfx/player_hurt.wav")
 		sfx.bus = "SFX"
-		add_child(sfx)
+		get_tree().current_scene.add_child(sfx)
 		sfx.play()
 		sfx.finished.connect(sfx.queue_free)
 
@@ -81,8 +81,7 @@ func die() -> void:
 	var sfx = AudioStreamPlayer.new()
 	sfx.stream = preload("res://assets/audio/sfx/player_die.wav")
 	sfx.bus = "SFX"
-	var root = get_tree().root
-	root.add_child(sfx)
+	get_tree().root.add_child(sfx)
 	sfx.play()
 	sfx.finished.connect(sfx.queue_free)
 
@@ -111,10 +110,10 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
-		var sfx = AudioStreamPlayer3D.new()
+		var sfx = AudioStreamPlayer.new()
 		sfx.stream = preload("res://assets/audio/sfx/jump.wav")
 		sfx.bus = "SFX"
-		add_child(sfx)
+		get_tree().current_scene.add_child(sfx)
 		sfx.play()
 		sfx.finished.connect(sfx.queue_free)
 
@@ -142,11 +141,11 @@ func _physics_process(delta: float) -> void:
 		footstep_timer -= delta
 		if footstep_timer <= 0.0:
 			footstep_timer = 0.4
-			var sfx = AudioStreamPlayer3D.new()
+			var sfx = AudioStreamPlayer.new()
 			sfx.stream = preload("res://assets/audio/sfx/footstep.wav")
 			sfx.bus = "SFX"
 			sfx.pitch_scale = randf_range(0.9, 1.1)
-			add_child(sfx)
+			get_tree().current_scene.add_child(sfx)
 			sfx.play()
 			sfx.finished.connect(sfx.queue_free)
 	else:
