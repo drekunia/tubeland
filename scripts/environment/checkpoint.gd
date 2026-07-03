@@ -1,6 +1,7 @@
 extends Area3D
 
 func _ready() -> void:
+	add_to_group("checkpoint")
 	body_entered.connect(_on_body_entered)
 	if GameEvents.has_checkpoint:
 		var level_two_scene = load("res://scenes/environments/level_two.tscn")

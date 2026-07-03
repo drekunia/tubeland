@@ -25,8 +25,10 @@ var _card_hand: Array[CardType.Type] = []
 var current_health: int
 var dash_time_remaining: float = 0.0
 var dash_hit_targets: Array[Node] = []
+var _start_spawn_position: Vector3
 
 func _ready() -> void:
+	_start_spawn_position = global_position
 	add_to_group("player")
 	if GameEvents.is_seamless_transition:
 		global_position = GameEvents.seamless_position
@@ -72,6 +74,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset_checkpoint"):
 		die()
 		return
+
+	if OS.is_debug_build():
+		if Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_down"):
+			_debug_teleport_checkpoint(1)
+		elif Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_up"):
+			_debug_teleport_checkpoint(-1)
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -179,3 +187,23 @@ func get_hand() -> Array:
 
 func get_card_count() -> int:
 	return _card_hand.size()
+
+func _debug_teleport_checkpoint(dir: int) -> void:
+	var points: Array[Vector3] = [_start_spawn_position]
+	for cp in get_tree().get_nodes_in_group("checkpoint"):
+		points.append(cp.global_position)
+
+	points.sort_custom(func(a, b): return a.z > b.z)
+
+	var current_idx = 0
+	var min_dist = INF
+	for i in range(points.size()):
+		var dist = global_position.distance_to(points[i])
+		if dist < min_dist:
+			min_dist = dist
+			current_idx = i
+
+	var next_idx = clamp(current_idx + dir, 0, points.size() - 1)
+	if next_idx != current_idx:
+		global_position = points[next_idx]
+		velocity = Vector3.ZERO
