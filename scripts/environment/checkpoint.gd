@@ -32,13 +32,34 @@ func _ready() -> void:
 				if not GameEvents.has_animated_level_two:
 					level_two.position = Vector3(0, -19, -95)
 					scene_root.call_deferred("add_child", level_two)
-					call_deferred("_animate_level_two", level_two, final_pos)
+					call_deferred("_animate_level", level_two, final_pos)
 					GameEvents.has_animated_level_two = true
 				else:
 					level_two.position = final_pos
 					scene_root.call_deferred("add_child", level_two)
 
-func _animate_level_two(level_node: Node3D, final_pos: Vector3) -> void:
+	if GameEvents.touched_checkpoints.size() >= 2:
+		var scene_root_3 = get_tree().current_scene
+		if scene_root_3 and scene_root_3.name != "LevelThree":
+			if not scene_root_3.has_meta("spawning_level_three") and not scene_root_3.has_node("LevelThree"):
+				scene_root_3.set_meta("spawning_level_three", true)
+				
+				var level_three_scene = load("res://scenes/environments/level_three.tscn")
+				var level_three = level_three_scene.instantiate()
+				level_three.name = "LevelThree"
+				
+				var final_pos = Vector3(0, -5, -95)
+				
+				if not GameEvents.has_animated_level_three:
+					level_three.position = Vector3(0, -19, -95)
+					scene_root_3.call_deferred("add_child", level_three)
+					call_deferred("_animate_level", level_three, final_pos)
+					GameEvents.has_animated_level_three = true
+				else:
+					level_three.position = final_pos
+					scene_root_3.call_deferred("add_child", level_three)
+
+func _animate_level(level_node: Node3D, final_pos: Vector3) -> void:
 	var rigid_bodies = level_node.find_children("*", "RigidBody3D", true)
 	for rb in rigid_bodies:
 		rb.freeze = true
