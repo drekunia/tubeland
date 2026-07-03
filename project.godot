@@ -69,7 +69,7 @@ reset_checkpoint={
 
 [physics]
 
-3d/physics_engine="Jolt Physics"
+3d/physics_engine="DEFAULT"
 
 [rendering]
 
