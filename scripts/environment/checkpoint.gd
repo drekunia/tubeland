@@ -4,6 +4,14 @@ func _ready() -> void:
 	add_to_group("checkpoint")
 	body_entered.connect(_on_body_entered)
 	
+	# Create AudioStreamPlayer for checkpoint
+	var sfx = AudioStreamPlayer.new()
+	sfx.name = "CheckpointSFX"
+	sfx.stream = preload("res://assets/audio/sfx/checkpoint_reached.wav")
+	sfx.bus = "SFX"
+	add_child(sfx)
+
+	
 	var pos2d = Vector2(global_position.x, global_position.z)
 	var is_touched = false
 	for cp in GameEvents.touched_checkpoints:
@@ -158,6 +166,8 @@ func _on_body_entered(body: Node3D) -> void:
 			if "current_health" in body:
 				GameEvents.saved_health = body.current_health
 		else:
+			if has_node("CheckpointSFX"):
+				$CheckpointSFX.play()
 			GameEvents.set_checkpoint(global_position)
 			var godray = get_node_or_null("../GodRay")
 			if godray:

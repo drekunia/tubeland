@@ -9,6 +9,12 @@ class_name MeleeHitbox extends ShapeCast3D
 
 var can_melee: bool = true
 
+var swing_sounds = [
+	preload("res://assets/audio/sfx/melee_swing-1.wav"),
+	preload("res://assets/audio/sfx/melee_swing-2.wav"),
+	preload("res://assets/audio/sfx/melee_swing-3.wav")
+]
+
 func _ready() -> void:
 	collide_with_areas = true
 
@@ -27,6 +33,13 @@ func perform_melee():
 		return
 
 	can_melee = false
+
+	var swing_sfx = AudioStreamPlayer3D.new()
+	swing_sfx.stream = swing_sounds[randi() % swing_sounds.size()]
+	swing_sfx.bus = "SFX"
+	add_child(swing_sfx)
+	swing_sfx.play()
+	swing_sfx.finished.connect(swing_sfx.queue_free)
 
 	if slash_visual:
 		var mat = slash_visual.get_active_material(0)
@@ -53,6 +66,13 @@ func perform_melee():
 	force_shapecast_update()
 
 	if is_colliding():
+		var hit_sfx = AudioStreamPlayer3D.new()
+		hit_sfx.stream = preload("res://assets/audio/sfx/melee_hit.wav")
+		hit_sfx.bus = "SFX"
+		add_child(hit_sfx)
+		hit_sfx.play()
+		hit_sfx.finished.connect(hit_sfx.queue_free)
+
 		var hit_point = get_collision_point(0)
 		var hit_normal = get_collision_normal(0)
 

@@ -105,6 +105,38 @@ max_value = 10.0
 step = 1.0
 value = 10.0
 
+[node name="MusicHBox" type="HBoxContainer" parent="SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsVBox/MusicHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsVBox/MusicHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 1.0
+value = 10.0
+
+[node name="SFXHBox" type="HBoxContainer" parent="SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsVBox/SFXHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsVBox/SFXHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 1.0
+value = 10.0
+
 [node name="SensHBox" type="HBoxContainer" parent="SettingsVBox"]
 layout_mode = 2
 
@@ -132,5 +164,7 @@ text = "Back"
 [connection signal="pressed" from="MainVBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainVBox/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="value_changed" from="SettingsVBox/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="SettingsVBox/MusicHBox/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsVBox/SFXHBox/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="SettingsVBox/SensHBox/SensSlider" to="." method="_on_sens_slider_value_changed"]
 [connection signal="pressed" from="SettingsVBox/BackButton" to="." method="_on_settings_back_button_pressed"]

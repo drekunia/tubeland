@@ -84,6 +84,15 @@ func _shoot_at_player() -> void:
 	var proj = enemy_projectile_scene.instantiate() as Node3D
 	get_tree().current_scene.add_child(proj)
 
+	# Play shoot sound
+	var sfx = AudioStreamPlayer3D.new()
+	sfx.stream = preload("res://assets/audio/sfx/enemy_shoot.wav")
+	sfx.bus = "SFX"
+	get_tree().current_scene.add_child(sfx)
+	sfx.global_position = global_position
+	sfx.play()
+	sfx.finished.connect(sfx.queue_free)
+
 	# Spawn a bit above the dummy's base position
 	proj.global_position = global_position + Vector3(0, 1.5, 0)
 
@@ -99,6 +108,15 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	# Play die sound attached to scene root so it doesn't get cut off
+	var sfx = AudioStreamPlayer3D.new()
+	sfx.stream = preload("res://assets/audio/sfx/enemy_die.wav")
+	sfx.bus = "SFX"
+	get_tree().current_scene.add_child(sfx)
+	sfx.global_position = global_position
+	sfx.play()
+	sfx.finished.connect(sfx.queue_free)
+
 	collision_layer = 0
 	collision_mask = 0
 	_drop_card()

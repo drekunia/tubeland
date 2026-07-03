@@ -27,6 +27,7 @@ var dash_time_remaining: float = 0.0
 var dash_hit_targets: Array[Node] = []
 var _start_spawn_position: Vector3
 var time_alive: float = 0.0
+var footstep_timer: float = 0.0
 
 func _ready() -> void:
 	_start_spawn_position = global_position
@@ -58,6 +59,14 @@ func take_damage(amount: int) -> void:
 	current_health -= amount
 	GameEvents.player_health_changed.emit(current_health, max_health)
 
+	if current_health > 0:
+		var sfx = AudioStreamPlayer3D.new()
+		sfx.stream = preload("res://assets/audio/sfx/player_hurt.wav")
+		sfx.bus = "SFX"
+		add_child(sfx)
+		sfx.play()
+		sfx.finished.connect(sfx.queue_free)
+
 	if current_health <= 0:
 		die()
 
@@ -68,6 +77,14 @@ func restore_health() -> void:
 func die() -> void:
 	if has_node("CameraController"):
 		GameEvents.save_camera_euler($CameraController._camera_euler)
+
+	var sfx = AudioStreamPlayer.new()
+	sfx.stream = preload("res://assets/audio/sfx/player_die.wav")
+	sfx.bus = "SFX"
+	var root = get_tree().root
+	root.add_child(sfx)
+	sfx.play()
+	sfx.finished.connect(sfx.queue_free)
 
 	# Empty the card hand on death/reset as requested
 	GameEvents.has_saved_card_hand = false
@@ -94,6 +111,12 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+		var sfx = AudioStreamPlayer3D.new()
+		sfx.stream = preload("res://assets/audio/sfx/jump.wav")
+		sfx.bus = "SFX"
+		add_child(sfx)
+		sfx.play()
+		sfx.finished.connect(sfx.queue_free)
 
 	if Input.is_action_just_pressed("use_card") and not _card_hand.is_empty():
 		_use_card()
@@ -114,6 +137,20 @@ func _physics_process(delta: float) -> void:
 
 	var pre_dash_vel := velocity
 	move_and_slide()
+
+	if is_on_floor() and horizontal_vel.length() > 0.5:
+		footstep_timer -= delta
+		if footstep_timer <= 0.0:
+			footstep_timer = 0.4
+			var sfx = AudioStreamPlayer3D.new()
+			sfx.stream = preload("res://assets/audio/sfx/footstep.wav")
+			sfx.bus = "SFX"
+			sfx.pitch_scale = randf_range(0.9, 1.1)
+			add_child(sfx)
+			sfx.play()
+			sfx.finished.connect(sfx.queue_free)
+	else:
+		footstep_timer = 0.0
 
 	if dash_time_remaining > 0.0:
 		dash_time_remaining -= delta

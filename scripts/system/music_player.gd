@@ -8,7 +8,7 @@ func _ready():
 	add_child(audio_player)
 	audio_player.stream = game_music
 	audio_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	audio_player.bus = "Master"
+	audio_player.bus = "Music"
 
 func play_game_music():
 	if not audio_player.playing:

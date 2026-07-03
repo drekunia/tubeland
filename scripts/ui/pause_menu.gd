@@ -4,12 +4,16 @@ extends Control
 @onready var settings_vbox = $SettingsVBox
 
 @onready var volume_slider = $SettingsVBox/VolumeHBox/VolumeSlider
+@onready var music_slider = $SettingsVBox/MusicHBox/MusicSlider
+@onready var sfx_slider = $SettingsVBox/SFXHBox/SFXSlider
 @onready var sens_slider = $SettingsVBox/SensHBox/SensSlider
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 	_setup_slider_theme(volume_slider)
+	_setup_slider_theme(music_slider)
+	_setup_slider_theme(sfx_slider)
 	_setup_slider_theme(sens_slider)
 
 func _setup_slider_theme(slider: HSlider):
@@ -53,6 +57,8 @@ func show_main():
 
 func show_settings():
 	volume_slider.value = GlobalSettings.master_volume
+	music_slider.value = GlobalSettings.music_volume
+	sfx_slider.value = GlobalSettings.sfx_volume
 	sens_slider.value = GlobalSettings.mouse_sensitivity
 	main_vbox.hide()
 	settings_vbox.show()
@@ -80,6 +86,14 @@ func _on_settings_back_button_pressed():
 
 func _on_volume_slider_value_changed(value):
 	GlobalSettings.master_volume = value
+	GlobalSettings.apply_settings()
+
+func _on_music_slider_value_changed(value):
+	GlobalSettings.music_volume = value
+	GlobalSettings.apply_settings()
+
+func _on_sfx_slider_value_changed(value):
+	GlobalSettings.sfx_volume = value
 	GlobalSettings.apply_settings()
 
 func _on_sens_slider_value_changed(value):
