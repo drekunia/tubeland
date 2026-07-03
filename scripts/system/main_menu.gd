@@ -9,6 +9,7 @@ extends Control
 @onready var best_time_label = $MainVBox/BestTimeLabel
 
 func _ready():
+	MusicPlayer.stop_music()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show_main()
 	
@@ -51,6 +52,7 @@ func show_settings():
 	settings_vbox.show()
 
 func _on_start_button_pressed():
+	MusicPlayer.play_game_music()
 	GameEvents.start_run()
 	get_tree().change_scene_to_file("res://scenes/environments/level_one.tscn")
 

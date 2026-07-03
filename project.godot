@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GameEvents="*res://scripts/system/game_events.gd"
 GlobalSettings="*res://scripts/system/global_settings.gd"
+MusicPlayer="*res://scripts/system/music_player.gd"
+
 [display]
 
 window/size/viewport_width=960
@@ -69,7 +71,7 @@ reset_checkpoint={
 
 [physics]
 
-3d/physics_engine="DEFAULT"
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

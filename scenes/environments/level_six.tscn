@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="1_material"]
 [ext_resource type="PackedScene" uid="uid://dax2oi3ym362o" path="res://scenes/environments/checkpoint_platform.tscn" id="2_ckpt"]
-[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="3_rsxtd"]
+[ext_resource type="PackedScene" uid="uid://8maibwkofw0i" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="3_rsxtd"]
 [ext_resource type="Material" uid="uid://c8b2v9q4z7x1m" path="res://assets/materials/checkerboard_material.tres" id="4_checker"]
 
 [node name="LevelSix" type="Node3D" unique_id=518943306]

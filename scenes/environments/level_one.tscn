@@ -5,8 +5,8 @@
 [ext_resource type="Shader" uid="uid://c0i65euj72axv" path="res://assets/shaders/triplanar_floor.gdshader" id="3_d8wvi"]
 [ext_resource type="Texture2D" uid="uid://b4uc0758ov8gs" path="res://assets/textures/512x512/Bricks/Bricks_25-512x512.png" id="4_4x2wu"]
 [ext_resource type="PackedScene" uid="uid://dowwytdkkltfs" path="res://scenes/enemies/target_dummy.tscn" id="4_yd7wr"]
-[ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="5_ookm7"]
-[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="6_sl2ic"]
+[ext_resource type="PackedScene" uid="uid://cfireballen1" path="res://scenes/enemies/target_dummy_fireball.tscn" id="5_ookm7"]
+[ext_resource type="PackedScene" uid="uid://8maibwkofw0i" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="6_sl2ic"]
 [ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="10_material"]
 [ext_resource type="Script" uid="uid://cun2nwt7d1oqs" path="res://scripts/environment/checkpoint.gd" id="11_checkpoint"]
 

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ct7cp1fgm01o4"]
 
 [ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="1_material"]
-[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="2_q2seg"]
-[ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="3_t5al6"]
+[ext_resource type="PackedScene" uid="uid://8maibwkofw0i" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="2_q2seg"]
+[ext_resource type="PackedScene" uid="uid://cfireballen1" path="res://scenes/enemies/target_dummy_fireball.tscn" id="3_t5al6"]
 [ext_resource type="PackedScene" uid="uid://dowwytdkkltfs" path="res://scenes/enemies/target_dummy.tscn" id="4_t5al6"]
 [ext_resource type="PackedScene" uid="uid://dax2oi3ym362o" path="res://scenes/environments/checkpoint_platform.tscn" id="5_sxm8x"]
 
