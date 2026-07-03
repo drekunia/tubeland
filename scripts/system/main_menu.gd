@@ -9,6 +9,7 @@ extends Control
 @onready var sfx_slider = $SettingsVBox/SFXHBox/SFXSlider
 @onready var sens_slider = $SettingsVBox/SensHBox/SensSlider
 @onready var best_time_label = $MainVBox/BestTimeLabel
+@onready var last_time_label = $MainVBox/LastTimeLabel
 
 func _ready():
 	MusicPlayer.stop_music()
@@ -48,6 +49,13 @@ func _setup_slider_theme(slider: HSlider):
 		best_time_label.text = "Best Time: %.2f s" % GlobalSettings.best_time
 	else:
 		best_time_label.text = "Best Time: --"
+
+	# Update last time label
+	if GameEvents.last_run_time > 0.0:
+		last_time_label.text = "Last Time: %.2f s" % GameEvents.last_run_time
+		last_time_label.show()
+	else:
+		last_time_label.hide()
 
 func show_main():
 	main_vbox.show()
