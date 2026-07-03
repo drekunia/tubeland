@@ -3,31 +3,82 @@ extends Area3D
 func _ready() -> void:
 	add_to_group("checkpoint")
 	body_entered.connect(_on_body_entered)
+	
+	var pos2d = Vector2(global_position.x, global_position.z)
+	var is_touched = false
+	for cp in GameEvents.touched_checkpoints:
+		if cp.distance_to(pos2d) < 2.0:
+			is_touched = true
+			break
+			
+	if is_touched:
+		var godray = get_node_or_null("../GodRay")
+		if godray:
+			godray.hide()
+	
 	if GameEvents.has_checkpoint:
-		var level_two_scene = load("res://scenes/environments/level_two.tscn")
-		var level_two = level_two_scene.instantiate()
-		
-		var final_pos = Vector3(0, -5, -95)
-		level_two.global_position = Vector3(0, -19, -95)
-		
-		get_tree().current_scene.call_deferred("add_child", level_two)
-		call_deferred("_animate_level_two", level_two, final_pos)
+		var scene_root = get_tree().current_scene
+		if scene_root and scene_root.name != "LevelTwo":
+			# Use meta to ensure we only queue the spawn once per scene load
+			if not scene_root.has_meta("spawning_level_two") and not scene_root.has_node("LevelTwo"):
+				scene_root.set_meta("spawning_level_two", true)
+				
+				var level_two_scene = load("res://scenes/environments/level_two.tscn")
+				var level_two = level_two_scene.instantiate()
+				level_two.name = "LevelTwo"
+				
+				var final_pos = Vector3(0, -5, -95)
+				
+				if not GameEvents.has_animated_level_two:
+					level_two.position = Vector3(0, -19, -95)
+					scene_root.call_deferred("add_child", level_two)
+					call_deferred("_animate_level_two", level_two, final_pos)
+					GameEvents.has_animated_level_two = true
+				else:
+					level_two.position = final_pos
+					scene_root.call_deferred("add_child", level_two)
 
 func _animate_level_two(level_node: Node3D, final_pos: Vector3) -> void:
+	var rigid_bodies = level_node.find_children("*", "RigidBody3D", true)
+	for rb in rigid_bodies:
+		rb.freeze = true
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(level_node, "global_position", final_pos, 1.0)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
+		
+	tween.tween_callback(func():
+		for rb in rigid_bodies:
+			if is_instance_valid(rb):
+				rb.freeze = false
+	)
 
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		if GameEvents.has_checkpoint and GameEvents.current_checkpoint_position.is_equal_approx(global_position):
-			if body.has_method("restore_health"):
-				body.restore_health()
+		if "time_alive" in body and body.time_alive < 0.1:
 			return
 			
-		GameEvents.set_checkpoint(global_position)
+		var current_pos = Vector2(global_position.x, global_position.z)
+		var is_already_touched = false
+		for cp in GameEvents.touched_checkpoints:
+			if cp.distance_to(current_pos) < 2.0:
+				is_already_touched = true
+				break
+				
+		if is_already_touched:
+			if "current_health" in body:
+				GameEvents.saved_health = body.current_health
+		else:
+			GameEvents.set_checkpoint(global_position)
+			var godray = get_node_or_null("../GodRay")
+			if godray:
+				godray.hide()
+			
+			if body.has_method("restore_health"):
+				body.restore_health()
+			
 		if "_card_hand" in body:
 			GameEvents.save_card_hand(body._card_hand)
 			

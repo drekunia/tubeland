@@ -132,7 +132,7 @@ material = ExtResource("10_material")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1303539, -4.7750006, -29.924559)
 
 [node name="TargetDummy" parent="Node3D" unique_id=139084748 instance=ExtResource("4_yd7wr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79751444, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20962572, 0, 1.2254353)
 
 [node name="TargetDummy5" parent="Node3D" unique_id=796429181 instance=ExtResource("4_yd7wr")]
 transform = Transform3D(-0.46691325, 0, -0.8843033, 0, 1, 0, 0.8843033, 0, -0.46691325, 4.7801394, 10.764397, -15.215086)
@@ -160,3 +160,6 @@ transform = Transform3D(0.79240495, 0, 0.6099954, 0, 1, 0, -0.6099954, 0, 0.7924
 
 [node name="TargetDummy4" parent="Node3D" unique_id=1921921888 instance=ExtResource("6_sl2ic")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5511918, -4.7683716e-07, 6.7437153)
+
+[node name="TargetDummy11" parent="Node3D" unique_id=307783571 instance=ExtResource("6_sl2ic")]
+transform = Transform3D(0.9126359, 0, 0.40877333, 0, 1, 0, -0.40877333, 0, 0.9126359, 0.742126, -4.7683716e-07, -0.50626564)

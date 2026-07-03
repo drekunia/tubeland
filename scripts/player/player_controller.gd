@@ -26,6 +26,7 @@ var current_health: int
 var dash_time_remaining: float = 0.0
 var dash_hit_targets: Array[Node] = []
 var _start_spawn_position: Vector3
+var time_alive: float = 0.0
 
 func _ready() -> void:
 	_start_spawn_position = global_position
@@ -41,7 +42,12 @@ func _ready() -> void:
 		_card_hand = GameEvents.saved_card_hand.duplicate()
 		GameEvents.card_hand_changed.emit(_card_hand)
 
-	current_health = max_health
+	if GameEvents.saved_health > 0:
+		current_health = GameEvents.saved_health
+		GameEvents.saved_health = -1
+	else:
+		current_health = max_health
+
 	# Delay emitting the signal until the next frame to ensure GameEvents and UI are ready
 	call_deferred("_emit_initial_health")
 
@@ -71,6 +77,8 @@ func die() -> void:
 	get_tree().call_deferred("reload_current_scene")
 
 func _physics_process(delta: float) -> void:
+	time_alive += delta
+
 	if Input.is_action_just_pressed("reset_checkpoint"):
 		die()
 		return

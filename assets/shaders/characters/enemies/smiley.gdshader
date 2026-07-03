@@ -72,7 +72,7 @@ void vertex() {
 
 void fragment() {
     vec4 tex_color = texture(albedo_texture, UV);
-    // Multiply base color with texture color to tint the texture
-    // (This works even if the texture has no transparent background)
-    ALBEDO = base_color.rgb * tex_color.rgb;
+    // Use brightness to preserve black eyes/mouth while allowing any hue override
+    float brightness = max(tex_color.r, max(tex_color.g, tex_color.b));
+    ALBEDO = base_color.rgb * brightness;
 }

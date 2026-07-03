@@ -15,12 +15,12 @@ const ACTIVE_OUTLINE: Color = Color(1.0, 1.0, 1.0, 1.0)
 # Per-type fill and glow colors
 const FILL_COLORS: Dictionary = {
 	CardType.Type.ELEVATE:  Color(1.00, 0.75, 0.00),
-	CardType.Type.GODSPEED: Color(0.20, 1.00, 0.50),
+	CardType.Type.GODSPEED: Color(0.20, 0.50, 1.00),
 	CardType.Type.FIREBALL: Color(1.00, 0.42, 0.12),
 }
 const GLOW_COLORS: Dictionary = {
 	CardType.Type.ELEVATE:  Color(1.00, 0.75, 0.00, 0.22),
-	CardType.Type.GODSPEED: Color(0.20, 1.00, 0.50, 0.22),
+	CardType.Type.GODSPEED: Color(0.20, 0.50, 1.00, 0.22),
 	CardType.Type.FIREBALL: Color(1.00, 0.42, 0.12, 0.22),
 }
 const LABEL_STRINGS: Dictionary = {

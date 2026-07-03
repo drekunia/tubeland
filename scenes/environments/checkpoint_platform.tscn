@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dax2oi3ym362o"]
+
+[ext_resource type="Shader" uid="uid://c0i65euj72axv" path="res://assets/shaders/triplanar_floor.gdshader" id="1_y5byc"]
+[ext_resource type="Texture2D" uid="uid://b4uc0758ov8gs" path="res://assets/textures/512x512/Bricks/Bricks_25-512x512.png" id="2_jmm0q"]
+[ext_resource type="Script" uid="uid://cun2nwt7d1oqs" path="res://scripts/environment/checkpoint.gd" id="3_rdatj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1f3x"]
+render_priority = 0
+shader = ExtResource("1_y5byc")
+shader_parameter/enable_normal_map = false
+shader_parameter/enable_roughness = false
+shader_parameter/roughness = 1.0
+shader_parameter/x_albedo = ExtResource("2_jmm0q")
+shader_parameter/x_scale = 1.0
+shader_parameter/y_albedo = ExtResource("2_jmm0q")
+shader_parameter/y_scale = 1.0
+shader_parameter/z_albedo = ExtResource("2_jmm0q")
+shader_parameter/z_scale = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w00ly"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_godray"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.843137, 0, 0.4)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_js0e0"]
+material = SubResource("StandardMaterial3D_godray")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 100.0
+cap_top = false
+cap_bottom = false
+
+[node name="CheckpointPlatform" type="CSGBox3D" unique_id=1617833679]
+use_collision = true
+size = Vector3(5, 0.5, 5)
+material = SubResource("ShaderMaterial_j1f3x")
+
+[node name="CheckpointArea" type="Area3D" parent="." unique_id=1271684369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+script = ExtResource("3_rdatj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckpointArea" unique_id=1051578036]
+shape = SubResource("BoxShape3D_w00ly")
+
+[node name="GodRay" type="MeshInstance3D" parent="." unique_id=410346097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+mesh = SubResource("CylinderMesh_js0e0")

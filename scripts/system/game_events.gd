@@ -15,13 +15,25 @@ signal player_died()
 
 var current_checkpoint_position: Vector3 = Vector3.ZERO
 var has_checkpoint: bool = false
+var touched_checkpoints: Array[Vector2] = []
 
 func set_checkpoint(pos: Vector3) -> void:
 	current_checkpoint_position = pos
 	has_checkpoint = true
+	var pos2d = Vector2(pos.x, pos.z)
+	var found = false
+	for cp in touched_checkpoints:
+		if cp.distance_to(pos2d) < 2.0:
+			found = true
+			break
+	if not found:
+		touched_checkpoints.append(pos2d)
+
+var has_animated_level_two: bool = false
 
 var saved_card_hand: Array = []
 var has_saved_card_hand: bool = false
+var saved_health: int = -1
 
 func save_card_hand(hand: Array) -> void:
 	saved_card_hand = hand.duplicate()
