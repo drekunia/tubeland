@@ -2,6 +2,7 @@ extends Control
 
 @onready var main_vbox = $MainVBox
 @onready var settings_vbox = $SettingsVBox
+@onready var quit_button = $MainVBox/QuitButton
 
 @onready var volume_slider = $SettingsVBox/VolumeHBox/VolumeSlider
 @onready var sens_slider = $SettingsVBox/SensHBox/SensSlider
@@ -13,9 +14,29 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show_main()
 	
+	if OS.has_feature("web"):
+		quit_button.hide()
+	
 	# Load settings to UI
 	volume_slider.value = GlobalSettings.master_volume
 	sens_slider.value = GlobalSettings.mouse_sensitivity
+	_setup_slider_theme(volume_slider)
+	_setup_slider_theme(sens_slider)
+
+func _setup_slider_theme(slider: HSlider):
+	var grad = Gradient.new()
+	grad.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
+	grad.offsets = PackedFloat32Array([0.0, 0.85])
+	grad.colors = PackedColorArray([Color.WHITE, Color.TRANSPARENT])
+	var tex = GradientTexture2D.new()
+	tex.gradient = grad
+	tex.width = 20
+	tex.height = 20
+	tex.fill = GradientTexture2D.FILL_RADIAL
+	tex.fill_from = Vector2(0.5, 0.5)
+	tex.fill_to = Vector2(1.0, 0.5)
+	slider.add_theme_icon_override("grabber", tex)
+	slider.add_theme_icon_override("grabber_highlight", tex)
 	
 	# Update best time label
 	if GlobalSettings.best_time > 0.0:

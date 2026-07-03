@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b0y264t2mkspr" path="res://scripts/ui/card_hud.gd" id="3_cardhud"]
 [ext_resource type="Script" path="res://scripts/ui/health_hud.gd" id="4_healthhud"]
 [ext_resource type="Script" path="res://scripts/ui/time_hud.gd" id="5_timehud"]
+[ext_resource type="PackedScene" path="res://scenes/system/pause_menu.tscn" id="6_pausemenu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s3ato"]
 
@@ -106,3 +107,5 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 modulate = Color(1, 1, 1, 0)
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_pausemenu")]

@@ -32,6 +32,13 @@ func start_run() -> void:
 	has_animated_level_six = false
 	has_checkpoint = false
 	touched_checkpoints.clear()
+	saved_card_hand.clear()
+	has_saved_card_hand = false
+	saved_health = -1
+	is_seamless_transition = false
+	seamless_position = Vector3.ZERO
+	seamless_velocity = Vector3.ZERO
+	has_camera_euler = false
 
 func stop_run() -> void:
 	if is_run_active:

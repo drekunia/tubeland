@@ -10,9 +10,7 @@ func get_mouse_input() -> Vector2:
 	return _mouse_input
 
 func _ready() -> void:
-	if not GameEvents.initial_mouse_mode_set:
-		Input.mouse_mode = current_mouse_mode
-		GameEvents.initial_mouse_mode_set = true
+	Input.mouse_mode = current_mouse_mode
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

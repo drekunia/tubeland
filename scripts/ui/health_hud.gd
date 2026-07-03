@@ -18,4 +18,4 @@ func _on_health_changed(current: int, _max_health: int) -> void:
 	var hearts = ""
 	for i in range(current):
 		hearts += "♥"
-	_health_label.text = "HEALTH: " + hearts
+	_health_label.text = hearts
