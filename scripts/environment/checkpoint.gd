@@ -9,6 +9,7 @@ func _ready() -> void:
 	sfx.name = "CheckpointSFX"
 	sfx.stream = preload("res://assets/audio/sfx/checkpoint_reached.wav")
 	sfx.bus = "SFX"
+	sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	add_child(sfx)
 
 	

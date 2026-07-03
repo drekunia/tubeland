@@ -32,6 +32,7 @@ func perform_melee():
 	var swing_sfx = AudioStreamPlayer.new()
 	swing_sfx.stream = preload("res://assets/audio/sfx/melee_swing.wav")
 	swing_sfx.bus = "SFX"
+	swing_sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	get_tree().current_scene.add_child(swing_sfx)
 	swing_sfx.play()
 	swing_sfx.finished.connect(swing_sfx.queue_free)
@@ -64,6 +65,7 @@ func perform_melee():
 		var hit_sfx = AudioStreamPlayer.new()
 		hit_sfx.stream = preload("res://assets/audio/sfx/melee_hit.wav")
 		hit_sfx.bus = "SFX"
+		hit_sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 		get_tree().current_scene.add_child(hit_sfx)
 		hit_sfx.play()
 		hit_sfx.finished.connect(hit_sfx.queue_free)

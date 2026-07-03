@@ -63,6 +63,7 @@ func take_damage(amount: int) -> void:
 		var sfx = AudioStreamPlayer.new()
 		sfx.stream = preload("res://assets/audio/sfx/player_hurt.wav")
 		sfx.bus = "SFX"
+		sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 		get_tree().current_scene.add_child(sfx)
 		sfx.play()
 		sfx.finished.connect(sfx.queue_free)
@@ -81,6 +82,7 @@ func die() -> void:
 	var sfx = AudioStreamPlayer.new()
 	sfx.stream = preload("res://assets/audio/sfx/player_die.wav")
 	sfx.bus = "SFX"
+	sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	get_tree().root.add_child(sfx)
 	sfx.play()
 	sfx.finished.connect(sfx.queue_free)
@@ -113,6 +115,7 @@ func _physics_process(delta: float) -> void:
 		var sfx = AudioStreamPlayer.new()
 		sfx.stream = preload("res://assets/audio/sfx/jump.wav")
 		sfx.bus = "SFX"
+		sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 		get_tree().current_scene.add_child(sfx)
 		sfx.play()
 		sfx.finished.connect(sfx.queue_free)
@@ -144,6 +147,7 @@ func _physics_process(delta: float) -> void:
 			var sfx = AudioStreamPlayer.new()
 			sfx.stream = preload("res://assets/audio/sfx/footstep.wav")
 			sfx.bus = "SFX"
+			sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 			sfx.pitch_scale = randf_range(0.9, 1.1)
 			get_tree().current_scene.add_child(sfx)
 			sfx.play()

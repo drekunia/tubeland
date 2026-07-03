@@ -88,6 +88,7 @@ func _shoot_at_player() -> void:
 	var sfx = AudioStreamPlayer3D.new()
 	sfx.stream = preload("res://assets/audio/sfx/enemy_shoot.wav")
 	sfx.bus = "SFX"
+	sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	get_tree().current_scene.add_child(sfx)
 	sfx.global_position = global_position
 	sfx.play()
@@ -112,6 +113,7 @@ func die():
 	var sfx = AudioStreamPlayer3D.new()
 	sfx.stream = preload("res://assets/audio/sfx/enemy_die.wav")
 	sfx.bus = "SFX"
+	sfx.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	get_tree().current_scene.add_child(sfx)
 	sfx.global_position = global_position
 	sfx.play()
