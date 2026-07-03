@@ -6,7 +6,7 @@ class_name PlayerController extends CharacterBody3D
 @export var acceleration: float = 35.0
 @export var deceleration: float = 20.0
 
-@export var max_health: int = 5
+@export var max_health: int = 3
 
 @export_group("Card Abilities")
 ## ELEVATE: upward burst velocity
@@ -14,7 +14,7 @@ class_name PlayerController extends CharacterBody3D
 ## GODSPEED: horizontal dash speed
 @export var godspeed_velocity: float = 24.0
 ## FIREBALL: full 3D dash speed toward crosshair
-@export var fireball_velocity: float = 28.0
+@export var fireball_velocity: float = 20.0
 ## Maximum cards held in hand at once
 @export var max_hand_size: int = 3
 
