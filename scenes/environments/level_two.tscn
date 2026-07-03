@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ct7cp1fgm01o4"]
+
+[ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="1_material"]
+[ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="2_q2seg"]
+[ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="3_t5al6"]
+
+[node name="LevelTwo" type="Node3D" unique_id=1415806910]
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=407657785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.00232, 5)
+use_collision = true
+size = Vector3(30, 34.00464, 50)
+material = ExtResource("1_material")
+
+[node name="Floor2" type="CSGBox3D" parent="." unique_id=743503677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -17.860138, 3.4913025)
+use_collision = true
+size = Vector3(30, 32.289, 23.238342)
+material = ExtResource("1_material")
+
+[node name="Floor3" type="CSGBox3D" parent="." unique_id=506182030]
+transform = Transform3D(0.93241036, 0, 0, 0, 0.6780895, 0, 0, 0, 1.6999993, 49.390247, -20.278748, 11.522949)
+use_collision = true
+size = Vector3(30, 41.307602, 23.238342)
+material = ExtResource("1_material")
+
+[node name="TargetDummy" parent="." unique_id=139084748 instance=ExtResource("2_q2seg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17808533, -1.9073486e-06, 28.969776)
+
+[node name="TargetDummy2" parent="." unique_id=795304046 instance=ExtResource("2_q2seg")]
+transform = Transform3D(0.6904382, 0, -0.7233914, 0, 1, 0, 0.7233914, 0, 0.6904382, 6.624668, -9.536743e-07, 25.204615)
+
+[node name="TargetDummy3" parent="." unique_id=372384856 instance=ExtResource("2_q2seg")]
+transform = Transform3D(0.94052756, 0, -0.33971745, 0, 1, 0, 0.33971745, 0, 0.94052756, 8.412208, -1.9073486e-06, 24.374203)
+
+[node name="TargetDummy4" parent="." unique_id=822883226 instance=ExtResource("3_t5al6")]
+transform = Transform3D(0.77403903, 0, -0.6331379, 0, 1, 0, 0.6331379, 0, 0.77403903, 10.737717, -1.9073486e-06, 23.550304)

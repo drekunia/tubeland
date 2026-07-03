@@ -28,8 +28,17 @@ var dash_hit_targets: Array[Node] = []
 
 func _ready() -> void:
 	add_to_group("player")
-	if GameEvents.has_checkpoint:
+	if GameEvents.is_seamless_transition:
+		global_position = GameEvents.seamless_position
+		velocity = GameEvents.seamless_velocity
+		GameEvents.is_seamless_transition = false
+	elif GameEvents.has_checkpoint:
 		global_position = GameEvents.current_checkpoint_position
+
+	if GameEvents.has_saved_card_hand:
+		_card_hand = GameEvents.saved_card_hand.duplicate()
+		GameEvents.card_hand_changed.emit(_card_hand)
+
 	current_health = max_health
 	# Delay emitting the signal until the next frame to ensure GameEvents and UI are ready
 	call_deferred("_emit_initial_health")
@@ -49,6 +58,13 @@ func restore_health() -> void:
 	GameEvents.player_health_changed.emit(current_health, max_health)
 
 func die() -> void:
+	if has_node("CameraController"):
+		GameEvents.save_camera_euler($CameraController._camera_euler)
+
+	# Empty the card hand on death/reset as requested
+	GameEvents.has_saved_card_hand = false
+	GameEvents.saved_card_hand.clear()
+
 	GameEvents.player_died.emit()
 	get_tree().call_deferred("reload_current_scene")
 

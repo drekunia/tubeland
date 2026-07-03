@@ -20,4 +20,22 @@ func set_checkpoint(pos: Vector3) -> void:
 	current_checkpoint_position = pos
 	has_checkpoint = true
 
+var saved_card_hand: Array = []
+var has_saved_card_hand: bool = false
+
+func save_card_hand(hand: Array) -> void:
+	saved_card_hand = hand.duplicate()
+	has_saved_card_hand = true
+
+var is_seamless_transition: bool = false
+var seamless_position: Vector3 = Vector3.ZERO
+var seamless_velocity: Vector3 = Vector3.ZERO
+
 var initial_mouse_mode_set: bool = false
+
+var current_camera_euler: Vector3 = Vector3.ZERO
+var has_camera_euler: bool = false
+
+func save_camera_euler(euler: Vector3) -> void:
+	current_camera_euler = euler
+	has_camera_euler = true

@@ -9,6 +9,13 @@ class_name CameraController extends Node3D
 
 var _camera_euler: Vector3
 
+func _ready() -> void:
+	if GameEvents.has_camera_euler:
+		_camera_euler = GameEvents.current_camera_euler
+		var player_rotation := Vector3(0.0, _camera_euler.y, 0.0)
+		var camera_rotation := Vector3(_camera_euler.x, 0.0, 0.0)
+		transform.basis = Basis.from_euler(camera_rotation)
+		player_controller.update_rotation(player_rotation)
 
 func update_camera_rotation(input: Vector2) -> void:
 	_camera_euler.x += input.y
