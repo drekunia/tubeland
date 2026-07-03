@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://dto0lm1egax4a"]
+[gd_scene format=3 uid="uid://cytdrckobdrnq"]
 
-[ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://assets/textures/grids/Dark/texture_08.png" id="1_5ymg4"]
+[ext_resource type="Texture2D" path="res://assets/textures/grids/Dark/texture_08.png" id="1_5ymg4"]
 [ext_resource type="PackedScene" uid="uid://du871hvx4j7hb" path="res://scenes/environments/world_environment.tscn" id="3_5ymg4"]
-[ext_resource type="Texture2D" uid="uid://c6w7772t1tdo8" path="res://assets/textures/grids/Red/texture_08.png" id="3_7p8cw"]
+[ext_resource type="Texture2D" path="res://assets/textures/grids/Red/texture_08.png" id="3_7p8cw"]
 [ext_resource type="PackedScene" uid="uid://wuw7dp76orfi" path="res://scenes/player/player_controller.tscn" id="4_vwqw5"]
 [ext_resource type="PackedScene" uid="uid://dowwytdkkltfs" path="res://scenes/enemies/target_dummy.tscn" id="5_7p8cw"]
 

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://c8bbyjhq1wk7c"]
+[gd_scene format=4 uid="uid://cfireballen1"]
 
 [ext_resource type="Script" uid="uid://xp35446g4jsd" path="res://scripts/enemies/target_dummy.gd" id="1_p728r"]
 [ext_resource type="Texture2D" uid="uid://bve2qxnjajvt0" path="res://assets/meshes/characters/enemies/smiley_albedo.png" id="2_3o7vv"]
@@ -59,7 +59,7 @@ shader_parameter/arm_blend_distance = 0.3
 shader_parameter/arm_speed = 8.0
 shader_parameter/arm_flap_amount = 0.3
 shader_parameter/shoot_intensity = 0.0
-shader_parameter/base_color = Color(1, 0.4, 0.1, 1)
+shader_parameter/base_color = Color(1, 0.42, 0.12, 1)
 shader_parameter/albedo_texture = ExtResource("2_3o7vv")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7p8cw"]

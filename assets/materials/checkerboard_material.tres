@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c8b2waq407x1m"]
+
+[sub_resource type="Shader" id="Shader_checker"]
+code = "shader_type spatial;
+
+uniform float scale = 2.0;
+uniform vec3 color1 : source_color = vec3(0.0);
+uniform vec3 color2 : source_color = vec3(1.0);
+
+void fragment() {
+	vec3 world_pos = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 pos = floor(world_pos * scale);
+	float pattern = mod(pos.x + pos.y + pos.z, 2.0);
+	ALBEDO = mix(color1, color2, pattern);
+}
+"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_checker")
+shader_parameter/scale = 2.0
+shader_parameter/color1 = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/color2 = Color(0.9, 0.9, 0.9, 1)

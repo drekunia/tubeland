@@ -8,8 +8,6 @@ extends Control
 @onready var sens_slider = $SettingsVBox/SensHBox/SensSlider
 @onready var best_time_label = $MainVBox/BestTimeLabel
 
-const LEVEL_ONE = "uid://ks7c6qeodjbc" # level_one.tscn uid
-
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show_main()

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d23mc6vmtynhp"]
+[gd_scene format=4 uid="uid://8maibwkofw0i"]
 
 [ext_resource type="Script" uid="uid://xp35446g4jsd" path="res://scripts/enemies/target_dummy.gd" id="1_p728r"]
 [ext_resource type="Texture2D" uid="uid://bve2qxnjajvt0" path="res://assets/meshes/characters/enemies/smiley_albedo.png" id="2_3o7vv"]
