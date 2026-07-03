@@ -17,6 +17,36 @@ var current_checkpoint_position: Vector3 = Vector3.ZERO
 var has_checkpoint: bool = false
 var touched_checkpoints: Array[Vector2] = []
 
+var run_start_time_msec: int = 0
+var is_run_active: bool = false
+var last_run_time: float = 0.0
+
+func start_run() -> void:
+	run_start_time_msec = Time.get_ticks_msec()
+	is_run_active = true
+	# Reset state just in case
+	has_animated_level_two = false
+	has_animated_level_three = false
+	has_animated_level_four = false
+	has_animated_level_five = false
+	has_animated_level_six = false
+	has_checkpoint = false
+	touched_checkpoints.clear()
+
+func stop_run() -> void:
+	if is_run_active:
+		last_run_time = (Time.get_ticks_msec() - run_start_time_msec) / 1000.0
+		is_run_active = false
+		if GlobalSettings.best_time <= 0.0 or last_run_time < GlobalSettings.best_time:
+			GlobalSettings.best_time = last_run_time
+			GlobalSettings.save_settings()
+
+func get_current_run_time() -> float:
+	if not is_run_active:
+		return last_run_time
+	return (Time.get_ticks_msec() - run_start_time_msec) / 1000.0
+
+
 func set_checkpoint(pos: Vector3) -> void:
 	current_checkpoint_position = pos
 	has_checkpoint = true

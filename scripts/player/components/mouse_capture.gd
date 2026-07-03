@@ -16,8 +16,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		_mouse_input.x -= deg_to_rad(event.relative.x * mouse_sensitivity * 0.0125)
-		_mouse_input.y -= deg_to_rad(event.relative.y * mouse_sensitivity * 0.0125)
+		var current_sensitivity = GlobalSettings.mouse_sensitivity
+		_mouse_input.x -= deg_to_rad(event.relative.x * current_sensitivity * 0.0125)
+		_mouse_input.y -= deg_to_rad(event.relative.y * current_sensitivity * 0.0125)
 
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

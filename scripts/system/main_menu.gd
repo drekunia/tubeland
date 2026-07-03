@@ -1,0 +1,53 @@
+extends Control
+
+@onready var main_vbox = $MainVBox
+@onready var settings_vbox = $SettingsVBox
+
+@onready var volume_slider = $SettingsVBox/VolumeHBox/VolumeSlider
+@onready var sens_slider = $SettingsVBox/SensHBox/SensSlider
+@onready var best_time_label = $MainVBox/BestTimeLabel
+
+const LEVEL_ONE = "uid://ks7c6qeodjbc" # level_one.tscn uid
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	show_main()
+	
+	# Load settings to UI
+	volume_slider.value = GlobalSettings.master_volume
+	sens_slider.value = GlobalSettings.mouse_sensitivity
+	
+	# Update best time label
+	if GlobalSettings.best_time > 0.0:
+		best_time_label.text = "Best Time: %.2f s" % GlobalSettings.best_time
+	else:
+		best_time_label.text = "Best Time: --"
+
+func show_main():
+	main_vbox.show()
+	settings_vbox.hide()
+
+func show_settings():
+	main_vbox.hide()
+	settings_vbox.show()
+
+func _on_start_button_pressed():
+	GameEvents.start_run()
+	get_tree().change_scene_to_file("res://scenes/environments/level_one.tscn")
+
+func _on_settings_button_pressed():
+	show_settings()
+
+func _on_quit_button_pressed():
+	get_tree().quit()
+
+func _on_settings_back_button_pressed():
+	GlobalSettings.save_settings()
+	show_main()
+
+func _on_volume_slider_value_changed(value):
+	GlobalSettings.master_volume = value
+	GlobalSettings.apply_settings()
+
+func _on_sens_slider_value_changed(value):
+	GlobalSettings.mouse_sensitivity = value

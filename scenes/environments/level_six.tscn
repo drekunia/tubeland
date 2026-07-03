@@ -7,13 +7,13 @@
 [node name="LevelSix" type="Node3D" unique_id=518943306]
 
 [node name="Floor9" type="CSGBox3D" parent="." unique_id=1874946829]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.584854, -6.132616, -6.8425293)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.584854, -7.654079, -6.8425293)
 use_collision = true
 size = Vector3(12.62793, 20.679598, 12.613281)
 material = ExtResource("1_material")
 
 [node name="FinishPlatform" parent="." unique_id=1109278817 instance=ExtResource("2_ckpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.39886, 4.457184, -10.649129)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.39886, 2.935721, -10.649129)
 
 [node name="TargetDummy" parent="." unique_id=139084748 instance=ExtResource("3_rsxtd")]
-transform = Transform3D(0.92064893, 0, -0.39039147, 0, 1, 0, 0.39039147, 0, 0.92064893, 61.723404, 4.207184, -2.5861545)
+transform = Transform3D(0.92064893, 0, -0.39039147, 0, 1, 0, 0.39039147, 0, 0.92064893, 61.723404, 2.685721, -2.5861545)

@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bqx3f22lmgk2j"]
+
+[ext_resource type="Script" path="res://scripts/system/main_menu.gd" id="1_mainmenu"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mainmenu")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "TUBELAND"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="MainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Start Game"
+
+[node name="SettingsButton" type="Button" parent="MainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="BestTimeLabel" type="Label" parent="MainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Best Time: --"
+horizontal_alignment = 1
+
+[node name="SettingsVBox" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="SettingsTitle" type="Label" parent="SettingsVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="VolumeHBox" type="HBoxContainer" parent="SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsVBox/VolumeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsVBox/VolumeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SensHBox" type="HBoxContainer" parent="SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsVBox/SensHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Sensitivity"
+
+[node name="SensSlider" type="HSlider" parent="SettingsVBox/SensHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 20.0
+step = 0.5
+value = 5.0
+
+[node name="BackButton" type="Button" parent="SettingsVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[connection signal="pressed" from="MainVBox/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainVBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="value_changed" from="SettingsVBox/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="SettingsVBox/SensHBox/SensSlider" to="." method="_on_sens_slider_value_changed"]
+[connection signal="pressed" from="SettingsVBox/BackButton" to="." method="_on_settings_back_button_pressed"]

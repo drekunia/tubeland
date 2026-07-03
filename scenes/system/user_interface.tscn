@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://c4mx4sqgpuw7w" path="res://assets/shaders/post_processing/speed_overlay.gdshader" id="2_s3ato"]
 [ext_resource type="Script" uid="uid://b0y264t2mkspr" path="res://scripts/ui/card_hud.gd" id="3_cardhud"]
 [ext_resource type="Script" path="res://scripts/ui/health_hud.gd" id="4_healthhud"]
+[ext_resource type="Script" path="res://scripts/ui/time_hud.gd" id="5_timehud"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s3ato"]
 
@@ -71,3 +72,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_healthhud")
+
+[node name="TimeHUD" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_bottom = 50.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("5_timehud")
+
+[node name="TimeLabel" type="Label" parent="HUD/TimeHUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "0.00"
+horizontal_alignment = 1
+
+[node name="FadeOverlay" type="ColorRect" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+modulate = Color(1, 1, 1, 0)

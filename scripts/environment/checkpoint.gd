@@ -143,6 +143,10 @@ func _on_body_entered(body: Node3D) -> void:
 		if "time_alive" in body and body.time_alive < 0.1:
 			return
 			
+		if get_parent().name == "FinishPlatform":
+			_trigger_finish(body)
+			return
+			
 		var current_pos = Vector2(global_position.x, global_position.z)
 		var is_already_touched = false
 		for cp in GameEvents.touched_checkpoints:
@@ -178,3 +182,23 @@ func _on_body_entered(body: Node3D) -> void:
 			
 		# Reload scene to reset all enemies, as requested
 		get_tree().call_deferred("reload_current_scene")
+
+func _trigger_finish(body: Node3D) -> void:
+	GameEvents.stop_run()
+	Engine.time_scale = 0.2
+	
+	await get_tree().create_timer(2.0, true, false, true).timeout
+	
+	Engine.time_scale = 1.0
+	var ui = null
+	if body.has_node("UserInterface/HUD"):
+		ui = body.get_node("UserInterface/HUD")
+	
+	if ui and ui.has_node("FadeOverlay"):
+		var fade = ui.get_node("FadeOverlay")
+		fade.show()
+		var tween = get_tree().create_tween()
+		tween.tween_property(fade, "modulate:a", 1.0, 1.0).from(0.0)
+		await tween.finished
+		
+	get_tree().change_scene_to_file("res://scenes/system/main_menu.tscn")

@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Tubeland"
-run/main_scene="uid://ks7c6qeodjbc"
+run/main_scene="uid://bqx3f22lmgk2j"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameEvents="*res://scripts/system/game_events.gd"
-
+GlobalSettings="*res://scripts/system/global_settings.gd"
 [display]
 
 window/size/viewport_width=960
