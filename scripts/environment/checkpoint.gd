@@ -79,6 +79,27 @@ func _ready() -> void:
 				else:
 					level_four.position = final_pos
 					scene_root_4.call_deferred("add_child", level_four)
+
+	if GameEvents.touched_checkpoints.size() >= 4:
+		var scene_root_5 = get_tree().current_scene
+		if scene_root_5 and scene_root_5.name != "LevelFive":
+			if not scene_root_5.has_meta("spawning_level_five") and not scene_root_5.has_node("LevelFive"):
+				scene_root_5.set_meta("spawning_level_five", true)
+				
+				var level_five_scene = load("res://scenes/environments/level_five.tscn")
+				var level_five = level_five_scene.instantiate()
+				level_five.name = "LevelFive"
+				
+				var final_pos = Vector3(0, -5, -95)
+				
+				if not GameEvents.has_animated_level_five:
+					level_five.position = Vector3(0, -19, -95)
+					scene_root_5.call_deferred("add_child", level_five)
+					call_deferred("_animate_level", level_five, final_pos)
+					GameEvents.has_animated_level_five = true
+				else:
+					level_five.position = final_pos
+					scene_root_5.call_deferred("add_child", level_five)
 func _animate_level(level_node: Node3D, final_pos: Vector3) -> void:
 	var rigid_bodies = level_node.find_children("*", "RigidBody3D", true)
 	for rb in rigid_bodies:
