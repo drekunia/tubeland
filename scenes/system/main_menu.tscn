@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/system/main_menu.gd" id="1_mainmenu"]
 
+[sub_resource type="SystemFont" id="SystemFont_comic"]
+font_names = PackedStringArray("Comic Sans MS")
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -28,6 +31,7 @@ theme_override_constants/separation = 20
 
 [node name="TitleLabel" type="Label" parent="MainVBox"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_comic")
 theme_override_font_sizes/font_size = 48
 text = "DANCERS IN THE SKY"
 horizontal_alignment = 1
