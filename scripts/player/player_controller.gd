@@ -28,6 +28,8 @@ var dash_hit_targets: Array[Node] = []
 
 func _ready() -> void:
 	add_to_group("player")
+	if GameEvents.has_checkpoint:
+		global_position = GameEvents.current_checkpoint_position
 	current_health = max_health
 	# Delay emitting the signal until the next frame to ensure GameEvents and UI are ready
 	call_deferred("_emit_initial_health")
@@ -42,11 +44,19 @@ func take_damage(amount: int) -> void:
 	if current_health <= 0:
 		die()
 
+func restore_health() -> void:
+	current_health = max_health
+	GameEvents.player_health_changed.emit(current_health, max_health)
+
 func die() -> void:
 	GameEvents.player_died.emit()
 	get_tree().call_deferred("reload_current_scene")
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("reset_checkpoint"):
+		die()
+		return
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 

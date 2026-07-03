@@ -33,7 +33,17 @@ func _process(delta: float) -> void:
 	if not players.is_empty():
 		var player = players[0]
 		if global_position.distance_to(player.global_position) <= aggro_radius:
-			is_aggro = true
+			var space_state = get_world_3d().direct_space_state
+			var start_pos = global_position + Vector3(0, 1.5, 0)
+			var end_pos = player.global_position + Vector3(0, 1.5, 0)
+			var query = PhysicsRayQueryParameters3D.create(start_pos, end_pos)
+			query.exclude = [self.get_rid()]
+			var result = space_state.intersect_ray(query)
+
+			if result and result.collider == player:
+				is_aggro = true
+
+		if is_aggro:
 			# Turn body to face the player (only rotating on the Y axis)
 			var target_pos = player.global_position
 			target_pos.y = global_position.y

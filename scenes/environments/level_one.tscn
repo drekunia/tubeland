@@ -6,6 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://c8bbyjhq1wk7c" path="res://scenes/enemies/target_dummy_fireball.tscn" id="5_ookm7"]
 [ext_resource type="PackedScene" uid="uid://d23mc6vmtynhp" path="res://scenes/enemies/target_dummy_godspeed.tscn" id="6_sl2ic"]
 [ext_resource type="Material" uid="uid://d1c2b3a4f5e6g" path="res://assets/materials/triplanar_floor_material.tres" id="10_material"]
+[ext_resource type="Script" uid="uid://cun2nwt7d1oqs" path="res://scripts/environment/checkpoint.gd" id="11_checkpoint"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_checkpoint"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_godray"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.843137, 0, 0.4)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_godray"]
+material = SubResource("StandardMaterial3D_godray")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 100.0
+cap_top = false
+cap_bottom = false
 
 [node name="LevelOne" type="Node3D" unique_id=2105970598]
 
@@ -44,6 +63,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -13.4786, -55.0
 use_collision = true
 size = Vector3(15, 16.592701, 15)
 material = ExtResource("10_material")
+
+[node name="CheckpointPlatform" type="CSGBox3D" parent="Floors" unique_id=1405377063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005789757, -4.93225, -55.001587)
+use_collision = true
+size = Vector3(5, 0.5, 5)
+material = ExtResource("10_material")
+
+[node name="CheckpointArea" type="Area3D" parent="Floors/CheckpointPlatform" unique_id=1131932275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+script = ExtResource("11_checkpoint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floors/CheckpointPlatform/CheckpointArea" unique_id=308443894]
+shape = SubResource("BoxShape3D_checkpoint")
+
+[node name="GodRay" type="MeshInstance3D" parent="Floors/CheckpointPlatform" unique_id=1017644096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+mesh = SubResource("CylinderMesh_godray")
 
 [node name="Floor6" type="CSGBox3D" parent="Floors" unique_id=2065562127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.694985, -10.917946, -52.22637)

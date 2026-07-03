@@ -12,3 +12,12 @@ signal player_health_changed(current_health: int, max_health: int)
 
 @warning_ignore("unused_signal")
 signal player_died()
+
+var current_checkpoint_position: Vector3 = Vector3.ZERO
+var has_checkpoint: bool = false
+
+func set_checkpoint(pos: Vector3) -> void:
+	current_checkpoint_position = pos
+	has_checkpoint = true
+
+var initial_mouse_mode_set: bool = false
