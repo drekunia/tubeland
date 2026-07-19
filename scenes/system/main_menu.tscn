@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bqx3f22lmgk2j"]
 
-[ext_resource type="Script" path="res://scripts/system/main_menu.gd" id="1_mainmenu"]
+[ext_resource type="Script" uid="uid://2e8kkyvw7ps1" path="res://scripts/system/main_menu.gd" id="1_mainmenu"]
 
 [sub_resource type="SystemFont" id="SystemFont_comic"]
 font_names = PackedStringArray("Comic Sans MS")
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1183637688]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mainmenu")
 
-[node name="MainVBox" type="VBoxContainer" parent="."]
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=316321388]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,41 +29,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="MainVBox"]
+[node name="TitleLabel" type="Label" parent="MainVBox" unique_id=1625252139]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_comic")
 theme_override_font_sizes/font_size = 48
 text = "DANCERS IN THE SKY"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="MainVBox"]
+[node name="StartButton" type="Button" parent="MainVBox" unique_id=292303425]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Start Game"
 
-[node name="SettingsButton" type="Button" parent="MainVBox"]
+[node name="SettingsButton" type="Button" parent="MainVBox" unique_id=852141404]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="MainVBox"]
+[node name="QuitButton" type="Button" parent="MainVBox" unique_id=1048091654]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Quit Game"
 
-[node name="LastTimeLabel" type="Label" parent="MainVBox"]
+[node name="LastTimeLabel" type="Label" parent="MainVBox" unique_id=894237602]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Last Time: --"
 horizontal_alignment = 1
 
-[node name="BestTimeLabel" type="Label" parent="MainVBox"]
+[node name="BestTimeLabel" type="Label" parent="MainVBox" unique_id=730224388]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Best Time: --"
 horizontal_alignment = 1
 
-[node name="SettingsVBox" type="VBoxContainer" parent="."]
+[node name="SettingsVBox" type="VBoxContainer" parent="." unique_id=1158016018]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -79,78 +79,74 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="SettingsTitle" type="Label" parent="SettingsVBox"]
+[node name="SettingsTitle" type="Label" parent="SettingsVBox" unique_id=526596633]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="VolumeHBox" type="HBoxContainer" parent="SettingsVBox"]
+[node name="VolumeHBox" type="HBoxContainer" parent="SettingsVBox" unique_id=1936577870]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsVBox/VolumeHBox"]
+[node name="Label" type="Label" parent="SettingsVBox/VolumeHBox" unique_id=1154945579]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Master Volume"
 
-[node name="VolumeSlider" type="HSlider" parent="SettingsVBox/VolumeHBox"]
+[node name="VolumeSlider" type="HSlider" parent="SettingsVBox/VolumeHBox" unique_id=1596450288]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 10.0
-step = 1.0
 value = 10.0
 
-[node name="MusicHBox" type="HBoxContainer" parent="SettingsVBox"]
+[node name="MusicHBox" type="HBoxContainer" parent="SettingsVBox" unique_id=944043533]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsVBox/MusicHBox"]
+[node name="Label" type="Label" parent="SettingsVBox/MusicHBox" unique_id=784590373]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume"
 
-[node name="MusicSlider" type="HSlider" parent="SettingsVBox/MusicHBox"]
+[node name="MusicSlider" type="HSlider" parent="SettingsVBox/MusicHBox" unique_id=610544513]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 10.0
-step = 1.0
 value = 10.0
 
-[node name="SFXHBox" type="HBoxContainer" parent="SettingsVBox"]
+[node name="SFXHBox" type="HBoxContainer" parent="SettingsVBox" unique_id=1213914831]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsVBox/SFXHBox"]
+[node name="Label" type="Label" parent="SettingsVBox/SFXHBox" unique_id=694145904]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX Volume"
 
-[node name="SFXSlider" type="HSlider" parent="SettingsVBox/SFXHBox"]
+[node name="SFXSlider" type="HSlider" parent="SettingsVBox/SFXHBox" unique_id=890216601]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 10.0
-step = 1.0
 value = 10.0
 
-[node name="SensHBox" type="HBoxContainer" parent="SettingsVBox"]
+[node name="SensHBox" type="HBoxContainer" parent="SettingsVBox" unique_id=294987687]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsVBox/SensHBox"]
+[node name="Label" type="Label" parent="SettingsVBox/SensHBox" unique_id=1518253785]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mouse Sensitivity"
 
-[node name="SensSlider" type="HSlider" parent="SettingsVBox/SensHBox"]
+[node name="SensSlider" type="HSlider" parent="SettingsVBox/SensHBox" unique_id=1240670650]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
 max_value = 10.0
-step = 1.0
 value = 5.0
 
-[node name="BackButton" type="Button" parent="SettingsVBox"]
+[node name="BackButton" type="Button" parent="SettingsVBox" unique_id=164411342]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Back"
